@@ -449,7 +449,3 @@ public class ProjectEuler {
 	}
 	
 }
-
-enum Direction{
-	DOWN,RIGHT,DIAGONAL_RIGHT,DIAGONAL_LEFT;
-}
