@@ -3,8 +3,6 @@ package com.ssparrow.projecteuler;
 import java.math.BigInteger;
 import java.util.BitSet;
 
-import com.ssparrow.algorithm.array.Triplet;
-
 public class ProjectEuler {
 
 	/**

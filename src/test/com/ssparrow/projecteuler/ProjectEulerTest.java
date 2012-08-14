@@ -6,8 +6,6 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
-import com.ssparrow.algorithm.array.Triplet;
-
 public class ProjectEulerTest {
 
 	@Test
