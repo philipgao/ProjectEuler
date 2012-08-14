@@ -208,4 +208,30 @@ public class ProjectEulerTest {
 		
 		assertEquals(70600674, ProjectEuler.p011FindLargestAdjacentProduct(matrix));
 	}
+	
+	@Test
+	public void testGetAllPrimeBelowN(){
+		assertArrayEquals(new int[]{1}, ProjectEuler.getAllPrimeBelowN(1));
+
+		assertArrayEquals(new int[]{1,2}, ProjectEuler.getAllPrimeBelowN(2));
+
+		assertArrayEquals(new int[]{1,2,3}, ProjectEuler.getAllPrimeBelowN(3));
+
+		assertArrayEquals(new int[]{1,2,3}, ProjectEuler.getAllPrimeBelowN(4));
+
+		assertArrayEquals(new int[]{1,2,3,5}, ProjectEuler.getAllPrimeBelowN(5));
+		
+		assertArrayEquals(new int[]{1,2,3,5,7}, ProjectEuler.getAllPrimeBelowN(10));
+
+		assertArrayEquals(new int[]{1,2,3,5,7,11,13,17,19}, ProjectEuler.getAllPrimeBelowN(20));
+		
+
+		assertEquals(5134, ProjectEuler.getAllPrimeBelowN(50000).length);
+	}
+	
+	@Test
+	public void testP012GetTriangleNumberWithGivenDivisors(){
+		assertEquals(76576500, ProjectEuler.p012GetTriangleNumberWithGivenDivisors(500));
+	}
+	
 }
