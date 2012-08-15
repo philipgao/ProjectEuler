@@ -537,4 +537,48 @@ public class ProjectEuler {
 		
 	}
 	
+	/**
+	 * Work out the first ten digits of the sum of the given one-hundred 50-digit numbers.
+	 * 
+	 * @param numbers
+	 * @return
+	 */
+	public static int [] p013FindFirst10DigitOfSum(String [] numbers){
+		int [] digits = new int[numbers[0].length()+3];
+		int index=0;
+		
+		int carryover=0;
+		
+		for (int i = numbers[0].length() - 1; i >= 0; i--) {
+			int sum = carryover;
+			
+			for (int j = 0; j < numbers.length; j++) {
+				int digit = numbers[j].charAt(i) - '0';
+				if (digit < 0 || digit > 9) {
+					return null;
+				}
+				sum+=digit;
+
+			}
+			
+			digits[index++]=sum%10;
+			
+			carryover=sum/10;
+		}
+		
+		while(carryover>0){
+			digits[index++]=carryover%10;
+			carryover=carryover/10;
+		}
+		
+		int [] result = new int [10];
+		int k=0;
+		int l=index-1;
+		while(k<10){
+			result[k++]=digits[l--];
+		}
+		
+		return result;
+	}
+	
 }
