@@ -3,7 +3,7 @@ package com.ssparrow.projecteuler;
 import java.math.BigInteger;
 import java.util.BitSet;
 
-public class ProjectEuler {
+public class Problem1To25 {
 
 	/**
 	 * If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. 
