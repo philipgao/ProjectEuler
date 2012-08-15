@@ -681,4 +681,85 @@ public class Problem1To25 {
 		return route;
 	}
 	
+	/**
+	 * 215 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+	 * 
+	 * What is the sum of the digits of the number 21000?
+	 * @param exp
+	 * @return
+	 */
+	public static BigInteger p016GetSumOfDigitsFor2Exp(int exp){
+		BigInteger number= BigInteger.valueOf(2);
+		number = number.pow(exp);
+		
+		BigInteger sum=BigInteger.ZERO;
+		BigInteger[] divideAndRemainder = number.divideAndRemainder(BigInteger.TEN);
+		
+		while(!number.equals(BigInteger.ZERO)){
+			sum=sum.add(divideAndRemainder[1]);
+			
+			number=divideAndRemainder[0];
+			divideAndRemainder = number.divideAndRemainder(BigInteger.TEN);
+		}
+		
+		return sum;
+	}
+	
+	/**
+	 * If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+	 * 
+	 * If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+	 * 
+	 * 
+	 * NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. 
+	 * The use of "and" when writing out numbers is in compliance with British usage.
+	 * @param max
+	 * @return
+	 */
+	public static int p017GetTotalLetterNumber(int max){
+		int total=0;
+		
+		for(int i=1;i<=max;i++){
+			total+=getStringRepresentationLength(i);
+		}
+		
+		return total;
+	}
+	
+	public static int getStringRepresentationLength(int number){
+		
+		String [] singles = new String[]{"", "one", "two", "three","four","five","six","seven","eight","nine"};
+		String [] tenSome = new String[]{"", "eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
+		String [] tens	  = new String[]{"","ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
+		String hundred="hundred";
+		String thousand="thousand";
+		String and="and";
+		
+		int length=0;
+		
+		if(number<10){
+			length+=singles[number].length();
+		}else if(number<100 && number%10==0){
+			length+=tens[number/10].length();
+		}else if(number>10 && number<20){
+			length+=tenSome[number-10].length();
+		}else if(number<100){
+			length+=tens[number/10].length()+singles[number%10].length();
+		}else if(number<1000 && number%100==0){
+			length+=singles[number/100].length()+hundred.length();
+		}else if(number<1000){
+			int tenAndSingle=number-(number/100)*100;
+			length+=singles[number/100].length()+hundred.length()+and.length()+getStringRepresentationLength(tenAndSingle);
+		}else if(number<10000 && number%1000==0){
+			length+=singles[number/1000].length()+thousand.length();
+		}else if(number<10000){
+			int hundredBelow=number-(number/1000)*1000;
+			length+=singles[number/1000].length()+thousand.length()+getStringRepresentationLength(hundredBelow);
+		}else{
+			return -1;
+		}
+		
+		return length;
+	}
+	
 }

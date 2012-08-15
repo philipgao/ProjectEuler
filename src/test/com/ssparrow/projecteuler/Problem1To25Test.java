@@ -366,4 +366,28 @@ public class Problem1To25Test {
 		assertEquals(new BigInteger("137846528820",10), Problem1To25.p015CalculateRouteNumberInMatrix(result, 0, 0, 20));
 	}
 	
+	@Test
+	public void testP016GetSumOfDigitsFor2Exp(){
+		assertEquals(new BigInteger("26", 10), Problem1To25.p016GetSumOfDigitsFor2Exp(15));
+
+		assertEquals(new BigInteger("115", 10), Problem1To25.p016GetSumOfDigitsFor2Exp(100));
+
+		assertEquals(new BigInteger("1366", 10), Problem1To25.p016GetSumOfDigitsFor2Exp(1000));
+	}
+	
+	@Test
+	public void testP017GetTotalLetterNumber(){
+		assertEquals(4, Problem1To25.getStringRepresentationLength(5));
+
+		assertEquals(9, Problem1To25.getStringRepresentationLength(17));
+
+		assertEquals(10, Problem1To25.getStringRepresentationLength(68));
+		
+		assertEquals(20, Problem1To25.getStringRepresentationLength(115));
+		
+		assertEquals(23, Problem1To25.getStringRepresentationLength(342));
+		
+		assertEquals(21124, Problem1To25.p017GetTotalLetterNumber(1000));
+	}
+	
 }
