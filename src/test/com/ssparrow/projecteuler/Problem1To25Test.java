@@ -340,4 +340,15 @@ public class Problem1To25Test {
 		assertArrayEquals(expected, Problem1To25.p013FindFirst10DigitOfSum(input));
 	}
 	
+	@Test
+	public void testP014findLongestCollatzChain(){
+		assertEquals(3, Problem1To25.p014findLongestCollatzChain(5));
+
+		assertEquals(871, Problem1To25.p014findLongestCollatzChain(1000));
+		
+		assertEquals(77031, Problem1To25.p014findLongestCollatzChain(100000));
+
+		assertEquals(837799, Problem1To25.p014findLongestCollatzChain(1000000));
+	}
+	
 }
