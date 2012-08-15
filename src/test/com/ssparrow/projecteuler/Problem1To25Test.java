@@ -351,4 +351,19 @@ public class Problem1To25Test {
 		assertEquals(837799, Problem1To25.p014findLongestCollatzChain(1000000));
 	}
 	
+	@Test
+	public void testP015CalculateRouteNumberInMatrix(){
+		BigInteger [][] result=new BigInteger[3][3];
+		assertEquals(new BigInteger("6",10), Problem1To25.p015CalculateRouteNumberInMatrix(result, 0, 0, 2));
+		
+		result=new BigInteger[11][11];
+		assertEquals(new BigInteger("184756",10), Problem1To25.p015CalculateRouteNumberInMatrix(result, 0, 0, 10));
+		
+		result=new BigInteger[16][16];
+		assertEquals(new BigInteger("155117520",10) , Problem1To25.p015CalculateRouteNumberInMatrix(result, 0, 0, 15));
+
+		result=new BigInteger[21][21];
+		assertEquals(new BigInteger("137846528820",10), Problem1To25.p015CalculateRouteNumberInMatrix(result, 0, 0, 20));
+	}
+	
 }

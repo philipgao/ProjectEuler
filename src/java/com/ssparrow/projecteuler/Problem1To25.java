@@ -643,4 +643,42 @@ public class Problem1To25 {
 		
 	}
 	
+	/**
+	 * Starting in the top left corner of a 2*2 grid, there are 6 routes (without backtracking) to the bottom right corner.
+	 * 
+	 * How many routes are there through a 20*20 grid?
+	 * 
+	 * @param row
+	 * @param column
+	 * @param n
+	 * @return
+	 */
+	public static BigInteger p015CalculateRouteNumberInMatrix(BigInteger [][] result, int row, int column, int n){
+		
+		if(result[row][column]!=null){
+			return result[row][column];
+		}
+		
+
+		if(row==n && column==n){
+			result[row][column]=BigInteger.valueOf(1);
+			return BigInteger.valueOf(1);
+		}
+		
+		//tricky part, although 10*10 grid seems small, the total path will exist limit of integer
+		BigInteger route =BigInteger.valueOf(0);
+		
+		if(row<n){
+			route=route.add(p015CalculateRouteNumberInMatrix(result, row+1, column, n));
+		}
+		
+		if(column<n){
+			route=route.add(p015CalculateRouteNumberInMatrix(result, row, column+1, n));
+		}
+		
+		result[row][column]=route;
+		
+		return route;
+	}
+	
 }
