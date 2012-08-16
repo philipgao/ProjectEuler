@@ -762,4 +762,40 @@ public class Problem1To25 {
 		return length;
 	}
 	
+	/**
+	 * By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+	 *
+	 *3
+	 *7 4
+	 *2 4 6
+	 *8 5 9 3
+	 *
+	 *That is, 3 + 7 + 4 + 9 = 23.
+	 *
+	 * Find the maximum total from top to bottom of the specified triangle :
+	 * 
+	 * NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. 
+	 * However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
+	 * @param matrix
+	 * @param row
+	 * @param column
+	 * @param path
+	 * @return
+	 */
+	public static int p018FindMaxPathInMatrix(int [][] matrix, int row, int column,int []path){
+		path[row]=matrix[row][column];
+		
+		if(row==matrix.length-1){
+			int sum=0;
+			for(int i=0;i<path.length;i++){
+				sum+=path[i];
+			}
+			return sum;
+		}
+		
+		int downMax=p018FindMaxPathInMatrix(matrix, row+1, column, path);
+		int downRightMax=p018FindMaxPathInMatrix(matrix, row+1, column+1, path);
+		
+		return Math.max(downMax, downRightMax);
+	}
 }
