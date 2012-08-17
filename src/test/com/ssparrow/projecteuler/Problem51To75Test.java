@@ -23,5 +23,21 @@ public class Problem51To75Test {
 
 		assertEquals(7273, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-100.txt",100));
 	}
+	
+	@Test
+	public void testP070FIndMinRatioPermutedTotient(){
+
+		assertEquals(0, Problem51To75.p070FIndMinRatioPermutedTotient(10));
+
+		assertEquals(616, Problem51To75.p070FIndMinRatioPermutedTotient(1000));
+		
+		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(10000));
+
+		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(100000));
+		
+		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
+		
+		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
+	}
 
 }

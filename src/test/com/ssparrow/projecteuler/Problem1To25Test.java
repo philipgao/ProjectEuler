@@ -211,22 +211,22 @@ public class Problem1To25Test {
 	
 	@Test
 	public void testGetAllPrimeBelowN(){
-		assertArrayEquals(new int[]{1}, Problem1To25.getAllPrimeBelowN(1));
+		assertArrayEquals(new int[]{1}, PrimeUtil.getAllPrimeBelowN(1));
 
-		assertArrayEquals(new int[]{1,2}, Problem1To25.getAllPrimeBelowN(2));
+		assertArrayEquals(new int[]{1,2}, PrimeUtil.getAllPrimeBelowN(2));
 
-		assertArrayEquals(new int[]{1,2,3}, Problem1To25.getAllPrimeBelowN(3));
+		assertArrayEquals(new int[]{1,2,3}, PrimeUtil.getAllPrimeBelowN(3));
 
-		assertArrayEquals(new int[]{1,2,3}, Problem1To25.getAllPrimeBelowN(4));
+		assertArrayEquals(new int[]{1,2,3}, PrimeUtil.getAllPrimeBelowN(4));
 
-		assertArrayEquals(new int[]{1,2,3,5}, Problem1To25.getAllPrimeBelowN(5));
+		assertArrayEquals(new int[]{1,2,3,5}, PrimeUtil.getAllPrimeBelowN(5));
 		
-		assertArrayEquals(new int[]{1,2,3,5,7}, Problem1To25.getAllPrimeBelowN(10));
+		assertArrayEquals(new int[]{1,2,3,5,7}, PrimeUtil.getAllPrimeBelowN(10));
 
-		assertArrayEquals(new int[]{1,2,3,5,7,11,13,17,19}, Problem1To25.getAllPrimeBelowN(20));
+		assertArrayEquals(new int[]{1,2,3,5,7,11,13,17,19}, PrimeUtil.getAllPrimeBelowN(20));
 		
 
-		assertEquals(5134, Problem1To25.getAllPrimeBelowN(50000).length);
+		assertEquals(5134, PrimeUtil.getAllPrimeBelowN(50000).length);
 	}
 	
 	@Test
