@@ -419,4 +419,13 @@ public class Problem1To25Test {
 		assertEquals(1074, Problem1To25.p018FindMaxPathInMatrix(matrix, 0, 0, path));
 	}	
 	
+	@Test
+	public void testP025FindFirstFibonacciNumberWithGivenDigits(){
+		assertEquals(12, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(3));
+
+		assertEquals(476, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(100));
+		
+		assertEquals(4782, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(1000));
+	}
+	
 }

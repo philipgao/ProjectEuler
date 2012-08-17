@@ -1,8 +1,10 @@
 package com.ssparrow.projecteuler;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.List;
 
 public class Problem1To25 {
 
@@ -795,5 +797,54 @@ public class Problem1To25 {
 		int downRightMax=p018FindMaxPathInMatrix(matrix, row+1, column+1, path);
 		
 		return Math.max(downMax, downRightMax);
+	}
+	
+	/**
+	 * The Fibonacci sequence is defined by the recurrence relation:
+	 * 		Fn = Fn1 + Fn2, where F1 = 1 and F2 = 1.
+	 * The 12th term, F12, is the first term to contain three digits.
+	 * What is the first term in the Fibonacci sequence to contain 1000 digits?
+	 * @param digits
+	 * @return
+	 */
+	public static int p025FindFirstFibonacciNumberWithGivenDigits(int digits){
+		BigInteger fibNMinus2 = BigInteger.ONE;
+		BigInteger fibNMinus1 = BigInteger.ONE;
+		
+		BigInteger number=fibNMinus2.add(fibNMinus1);
+		int n=3;
+		while(true){
+			if(getNumberOfDigits(number)>=digits){
+				return n;
+			}
+			
+			fibNMinus2=fibNMinus1;
+			fibNMinus1=number;
+			
+			number = fibNMinus2.add(fibNMinus1);;
+			n++;
+		}
+		
+	}
+	
+	public static BigInteger getFibonacciNumber(List<BigInteger> numbers, int n){
+		if(n<=numbers.size()){
+			return numbers.get(n-1);
+		}
+		
+		BigInteger number=getFibonacciNumber(numbers, n-2).add(getFibonacciNumber(numbers, n-1));
+		numbers.add(number);
+		return number;
+	}
+	
+	public static int getNumberOfDigits(BigInteger number){
+		int digits=1;
+		
+		while(number.divide(BigInteger.TEN).compareTo(BigInteger.ZERO)>0){
+			 number=number.divide(BigInteger.TEN);
+			 digits++;
+		}
+		
+		return digits;
 	}
 }
