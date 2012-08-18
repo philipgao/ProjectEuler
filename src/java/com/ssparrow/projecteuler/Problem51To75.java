@@ -81,34 +81,28 @@ public class Problem51To75 {
 	 * @return
 	 */
 	public static int p070FIndMinRatioPermutedTotient(int limit){
-		int [] primeList=PrimeUtil.getAllPrimeBelowN(limit);
+		int squareRoot=(int) Math.sqrt(limit);
 		
-		double minRatio=1;
+		int start = PrimeUtil.getAllPrimeBelowN(squareRoot/2).length;
+		int [] primeList  =PrimeUtil.getAllPrimeBelowN(squareRoot*2);
+		
+		double minRatio=Double.MAX_VALUE;
 		int result=0;
 		
-		int number=3;
-		for(;number<limit;number++){
-			int totient=1;
-			
-			int count=0;
-			
-			for(int j=1;j<primeList.length && primeList[j]<=number;j++){
-				if(number % primeList[j]==0){
-					int times=0;
-					for(int k=1; k*primeList[j] < number; k++){
-						times++;
+		for(int i=start;i<primeList.length;i++){
+			for(int j=i+1;j<primeList.length;j++){
+				int number=primeList[i]*primeList[j];
+				
+				if(number<=limit){
+					int totient= (primeList[i]-1)*(primeList[j]-1);
+					double ratio=((double)number)/((double)totient);
+					
+					if(isPermute(number, totient)){
+						if(ratio<minRatio){
+							result=number;
+							minRatio=ratio;
+						}
 					}
-					count+=times;
-				}
-			}
-			
-			totient=number-count-1;
-			
-			if(isPermute(number, totient)){
-				double ratio=((double)totient)/((double)number);
-				if(ratio<minRatio){
-					minRatio=ratio;
-					result=number;
 				}
 			}
 		}

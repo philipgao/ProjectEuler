@@ -26,18 +26,12 @@ public class Problem51To75Test {
 	
 	@Test
 	public void testP070FIndMinRatioPermutedTotient(){
-
-		assertEquals(0, Problem51To75.p070FIndMinRatioPermutedTotient(10));
-
-		assertEquals(616, Problem51To75.p070FIndMinRatioPermutedTotient(1000));
+		assertTrue(Problem51To75.isPermute(87109, 79180));
 		
-		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(10000));
+		assertEquals(783169,  Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
+		
+		assertEquals(8319823, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
 
-		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(100000));
-		
-		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
-		
-		assertEquals(7116, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
 	}
 
 }
