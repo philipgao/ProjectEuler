@@ -760,6 +760,51 @@ public class Problem1To25 {
 		return Math.max(downMax, downRightMax);
 	}
 	
+	
+	/**
+	 * You are given the following information, but you may prefer to do some research for yourself.
+	 * 
+	 * 1 Jan 1900 was a Monday.
+	 * Thirty days has September,
+	 * April, June and November.
+	 * All the rest have thirty-one,
+	 * Saving February alone,
+	 * Which has twenty-eight, rain or shine.
+	 * And on leap years, twenty-nine.
+	 * A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+	 * 
+	 * How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static int p019FindSundayOnFirstDay(int start, int end){
+		int [] daysInMoth=new int []{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+		
+		int daysInYear=0;
+		for(int i=0;i<daysInMoth.length;i++){
+			daysInYear+=daysInMoth[i];
+		}
+		
+		int count=0;
+		int startDayOfWeek=daysInYear%7+1;
+		
+		for(int year=start;year<=end;year++){
+			boolean isLeapyear= year%4==0 && year%100!=0;
+			for(int month=0;month<12;month++){
+				if(startDayOfWeek==7){
+					count++;
+				}
+				
+				int daysInCurrrentMonth = (month==1&& isLeapyear)?daysInMoth[month]+1:daysInMoth[month];
+				int remainder = (startDayOfWeek+daysInCurrrentMonth)%7;
+				startDayOfWeek= remainder==0? 7 : remainder ;
+			}
+		}
+		
+		return count;
+	}
+	
 	/**
 	 * The Fibonacci sequence is defined by the recurrence relation:
 	 * 		Fn = Fn1 + Fn2, where F1 = 1 and F2 = 1.
@@ -808,4 +853,5 @@ public class Problem1To25 {
 		
 		return digits;
 	}
+	
 }
