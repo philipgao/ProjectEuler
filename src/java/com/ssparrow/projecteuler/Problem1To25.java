@@ -805,6 +805,44 @@ public class Problem1To25 {
 		return count;
 	}
 	
+	public static int p020FindSumOfDigitsInNto1(int n){
+		BigInteger result=BigInteger.ONE;
+		
+		int power2=0;
+		
+		for(int number=n;number>1;number--){
+			int temp=number;
+			while(temp%10==0){
+				temp=temp/10;
+			}
+			
+			int i=5;
+			for(;i<=temp &&temp%i==0;i*=5){
+				power2++;
+			}
+			
+			temp=temp / (i/5);
+			
+			result = result.multiply(BigInteger.valueOf(temp));
+		}
+		
+		int exp2=(int) Math.pow(2, power2);
+		if(exp2>1){
+			result=result.divide(BigInteger.valueOf(exp2));
+		}
+		
+		int sum=0;
+		
+		while(result.compareTo(BigInteger.ZERO)>0){
+			BigInteger[] divideAndRemainder = result.divideAndRemainder(BigInteger.TEN);
+			
+			result=divideAndRemainder[0];
+			sum += divideAndRemainder[1].intValue();
+		}
+		
+		return sum;
+	}
+	
 	/**
 	 * The Fibonacci sequence is defined by the recurrence relation:
 	 * 		Fn = Fn1 + Fn2, where F1 = 1 and F2 = 1.

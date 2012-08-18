@@ -425,6 +425,19 @@ public class Problem1To25Test {
 	}
 	
 	@Test
+	public void testP020FindSumOfDigitsInNto1(){
+		assertEquals(3, Problem1To25.p020FindSumOfDigitsInNto1(5));
+
+		assertEquals( 27, Problem1To25.p020FindSumOfDigitsInNto1(10));
+
+		assertEquals( 54, Problem1To25.p020FindSumOfDigitsInNto1(20));
+
+		assertEquals( 117, Problem1To25.p020FindSumOfDigitsInNto1(30));
+
+		assertEquals( 648, Problem1To25.p020FindSumOfDigitsInNto1(100));
+	}
+	
+	@Test
 	public void testP025FindFirstFibonacciNumberWithGivenDigits(){
 		assertEquals(12, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(3));
 
