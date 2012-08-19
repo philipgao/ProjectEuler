@@ -896,6 +896,59 @@ public class Problem1To25 {
 	}
 	
 	/**
+	 * A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+	 * 
+	 * A number n is called deficient if the sum of its proper divisors is less than n and it is called abundant if this sum exceeds n.
+	 * 
+	 * As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. 
+	 * By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. 
+	 * However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+	 * 
+	 * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+	 * 
+	 * @return
+	 */
+	public static BigInteger p023FindSumOfAllNumberNotFormedByAbundantNumbers(){
+		final int UPPER_LIMIT=28124;
+
+		boolean [] flags=new boolean[UPPER_LIMIT];
+		
+		int [] abundantNumbers=new int[UPPER_LIMIT];
+		int abundantIndex=0;
+		
+		for(int number=2;number<UPPER_LIMIT;number++){
+			int[] allDivisors = PrimeUtil.getAllDivisors(number);
+			
+			int sum=0;
+			for(int i=0;i<allDivisors.length;i++){
+				sum+=allDivisors[i];
+			}
+			
+			if(sum>number){
+				abundantNumbers[abundantIndex++]=number;
+			}
+		}
+		
+		for(int i=0;i<abundantIndex;i++){
+			for(int j=i;j<abundantIndex;j++){
+				int value=abundantNumbers[i]+abundantNumbers[j];
+				if(value<UPPER_LIMIT){
+					flags[value]=true;
+				}
+			}
+		}
+		
+		BigInteger result=BigInteger.ZERO;
+		for(int i=1;i<UPPER_LIMIT; i++){
+			if(!flags[i]){
+				result=result.add(BigInteger.valueOf(i));
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * The Fibonacci sequence is defined by the recurrence relation:
 	 * 		Fn = Fn1 + Fn2, where F1 = 1 and F2 = 1.
 	 * The 12th term, F12, is the first term to contain three digits.

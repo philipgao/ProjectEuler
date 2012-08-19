@@ -458,6 +458,11 @@ public class Problem1To25Test {
 	}
 	
 	@Test
+	public void testP023FindSumOfAllNumberNotFormedByAbundantNumbers(){
+		assertEquals(BigInteger.valueOf(4179871), Problem1To25.p023FindSumOfAllNumberNotFormedByAbundantNumbers());
+	}
+	
+	@Test
 	public void testP025FindFirstFibonacciNumberWithGivenDigits(){
 		assertEquals(12, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(3));
 
