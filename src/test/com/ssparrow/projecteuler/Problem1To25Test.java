@@ -3,6 +3,9 @@ package com.ssparrow.projecteuler;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -439,7 +442,19 @@ public class Problem1To25Test {
 	
 	@Test
 	public void testP021FindAllAmicableNumbers(){
-		Problem1To25.p021FindAllAmicableNumbers(10000);
+		Set<AmicablePair> allAmicableNumbers = Problem1To25.p021FindAllAmicableNumbers(300);
+		
+		assertEquals(1, allAmicableNumbers.size());
+		
+		allAmicableNumbers = Problem1To25.p021FindAllAmicableNumbers(10000);
+		
+		int sum=0;
+		for(AmicablePair pair:allAmicableNumbers){
+			sum+=pair.getA()+pair.getB();
+			System.out.println(pair.getA()+":"+pair.getB());
+		}
+		assertEquals(31626, sum);
+			
 	}
 	
 	@Test

@@ -4,8 +4,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class Problem1To25 {
 
@@ -867,8 +869,8 @@ public class Problem1To25 {
 	 * @param limit
 	 * @return
 	 */
-	public static List<Pair> p021FindAllAmicableNumbers(int limit){
-		List<Pair> amicableNumbers=new LinkedList<Pair>();
+	public static Set<AmicablePair> p021FindAllAmicableNumbers(int limit){
+		Set<AmicablePair> amicableNumbers=new HashSet<AmicablePair>();
 		int [] divisorSums = new int[limit]; 
 		
 		int [] primeList = PrimeUtil.getAllPrimeBelowN(limit);
@@ -885,8 +887,8 @@ public class Problem1To25 {
 		}
 		
 		for(int number=3;number<divisorSums.length;number++){
-			if(divisorSums[number]<number && number == divisorSums[divisorSums[number]]){
-				amicableNumbers.add(new Pair(number, divisorSums[number]));
+			if(number!=divisorSums[number] && divisorSums[number]<limit && number == divisorSums[divisorSums[number]]){
+				amicableNumbers.add(new AmicablePair(number, divisorSums[number]));
 			}
 		}
 		

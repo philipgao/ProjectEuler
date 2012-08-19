@@ -21,6 +21,8 @@ public class PrimeUtilTest {
 
 		assertArrayEquals(new int []{1,5,2,10,4}, PrimeUtil.getAllDivisors(20));
 
+		assertArrayEquals(new int []{1, 7, 2, 14, 4}, PrimeUtil.getAllDivisors(28));
+
 		int[] allDivisors = PrimeUtil.getAllDivisors(220);
 		assertArrayEquals(new int []{1, 11, 5, 55, 2, 22, 10, 110, 4, 44, 20}, allDivisors);
 		
