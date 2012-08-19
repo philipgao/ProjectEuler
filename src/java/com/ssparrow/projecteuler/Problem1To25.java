@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Problem1To25 {
@@ -852,6 +853,44 @@ public class Problem1To25 {
 		}
 		
 		return sum;
+	}
+	
+	/**
+	 * Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+	 * If d(a) = b and d(b) = a, where a  b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+	 * 
+	 * For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284. 
+	 * The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+	 * 
+	 * Evaluate the sum of all the amicable numbers under 10000.
+	 * 
+	 * @param limit
+	 * @return
+	 */
+	public static List<Pair> p021FindAllAmicableNumbers(int limit){
+		List<Pair> amicableNumbers=new LinkedList<Pair>();
+		int [] divisorSums = new int[limit]; 
+		
+		int [] primeList = PrimeUtil.getAllPrimeBelowN(limit);
+		
+		for(int number=3; number <limit;number++){
+			int[] allDivisors = PrimeUtil.getAllDivisors(number);
+			
+			int sum=0;
+			for(int i=0;i<allDivisors.length;i++){
+				sum+=allDivisors[i];
+			}
+			
+			divisorSums[number]=sum;
+		}
+		
+		for(int number=3;number<divisorSums.length;number++){
+			if(divisorSums[number]<number && number == divisorSums[divisorSums[number]]){
+				amicableNumbers.add(new Pair(number, divisorSums[number]));
+			}
+		}
+		
+		return amicableNumbers;
 	}
 	
 	/**

@@ -438,6 +438,11 @@ public class Problem1To25Test {
 	}
 	
 	@Test
+	public void testP021FindAllAmicableNumbers(){
+		Problem1To25.p021FindAllAmicableNumbers(10000);
+	}
+	
+	@Test
 	public void testP025FindFirstFibonacciNumberWithGivenDigits(){
 		assertEquals(12, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(3));
 
