@@ -2,6 +2,7 @@ package com.ssparrow.projecteuler;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.List;
@@ -455,6 +456,11 @@ public class Problem1To25Test {
 		}
 		assertEquals(31626, sum);
 			
+	}
+	
+	@Test
+	public void testP022CalculateNameScore() throws IOException{
+		assertEquals(BigInteger.valueOf(871198282),Problem1To25.p022CalculateNameScore("test/data/p022.txt"));
 	}
 	
 	@Test

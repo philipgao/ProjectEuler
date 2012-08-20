@@ -1,13 +1,21 @@
 package com.ssparrow.projecteuler;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class Problem1To25 {
 
@@ -893,6 +901,70 @@ public class Problem1To25 {
 		}
 		
 		return amicableNumbers;
+	}
+	
+	/**
+	 * Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. 
+	 * Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
+	 *
+	 *For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list. So, COLIN would obtain a score of 938  53 = 49714.
+	 *
+	 *What is the total of all the name scores in the file?
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 */
+	public static BigInteger p022CalculateNameScore(String fileName) throws IOException{
+		TreeSet<String> names=new TreeSet<String>();
+		
+		FileChannel channel = new FileInputStream(fileName).getChannel();
+		ByteBuffer buffer=ByteBuffer.allocate((int) (channel.size()+1));
+		
+		int read;
+		String prefix="";
+		String record="";
+		while((read=channel.read(buffer))!=-1){
+			record=prefix + new String(buffer.array());
+			
+			if(!record.endsWith("\"") && !record.endsWith(",")){
+				prefix=record.substring(record.lastIndexOf('\"')+1);
+				record=record.substring(0, record.lastIndexOf('\"'));
+			}else{
+				prefix="";
+			}
+			
+			StringTokenizer st=new StringTokenizer(record,"\",");
+			while(st.hasMoreElements()){
+				String name = (String) st.nextElement();
+				names.add(name);
+//				System.out.println(name);
+			}
+			
+			buffer.clear();
+		}
+		
+		BigInteger nameScoreSum=BigInteger.ZERO;
+		int sequence=1;
+		for (Iterator iterator = names.iterator(); iterator.hasNext();) {
+			String name = (String) iterator.next();
+			
+			BigInteger nameScore=BigInteger.ZERO;
+			for(int i=0;i<name.length();i++){
+				int val = name.charAt(i)-'A'+1;
+				if(val<1||val>26){
+					return BigInteger.ZERO;
+				}
+				
+				nameScore = nameScore.add(BigInteger.valueOf(val));
+			}
+			nameScore=nameScore.multiply(BigInteger.valueOf(sequence));
+			
+			nameScoreSum=nameScoreSum.add(nameScore);
+			
+			sequence++;
+		}
+		
+		return nameScoreSum;
 	}
 	
 	/**
