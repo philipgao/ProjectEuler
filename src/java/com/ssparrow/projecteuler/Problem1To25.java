@@ -1021,6 +1021,52 @@ public class Problem1To25 {
 	}
 	
 	/**
+	 * A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+	 * 
+	 * 012  021   102   120   201   210
+	 * 
+	 * What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+	 * @param str
+	 * @param m
+	 * @return
+	 */
+	public static String p024FindGivenPermutation(String str, int m){
+		char [] chars=str.toCharArray();
+		boolean [] used= new boolean[str.length()];
+		
+		List<String> allPermutations=new ArrayList<String>();
+		char [] permutation =  new char [str.length()];
+		findPermutation(chars, used, 0, permutation, allPermutations, m);
+		
+		return allPermutations.get(m-1);
+	}
+	
+	private static void findPermutation(char [] chars, boolean[] used, int position, char[] permutation,List<String> allPermutations, int m){
+		if(position==chars.length){
+			allPermutations.add(new String(permutation));
+			
+			if(allPermutations.size()==m){
+				return;
+			}
+		}
+		
+		for(int i=0;i<chars.length;i++){
+			
+			if(allPermutations.size()==m){
+				return;
+			}
+			
+			if(!used[i]){
+				used[i]=true;
+				
+				permutation[position]=chars[i];
+				findPermutation(chars, used, position+1, permutation, allPermutations,m);
+				
+				used[i]=false;
+			}
+		}
+	}
+	/**
 	 * The Fibonacci sequence is defined by the recurrence relation:
 	 * 		Fn = Fn1 + Fn2, where F1 = 1 and F2 = 1.
 	 * The 12th term, F12, is the first term to contain three digits.

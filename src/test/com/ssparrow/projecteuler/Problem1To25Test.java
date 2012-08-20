@@ -469,6 +469,15 @@ public class Problem1To25Test {
 	}
 	
 	@Test
+	public void testP024FindGivenPermutation(){
+		assertEquals("102", Problem1To25.p024FindGivenPermutation("012", 3));
+
+		assertEquals("0312", Problem1To25.p024FindGivenPermutation("0123", 5));
+
+		assertEquals("2783915460", Problem1To25.p024FindGivenPermutation("0123456789", 1000000));
+	}
+	
+	@Test
 	public void testP025FindFirstFibonacciNumberWithGivenDigits(){
 		assertEquals(12, Problem1To25.p025FindFirstFibonacciNumberWithGivenDigits(3));
 
