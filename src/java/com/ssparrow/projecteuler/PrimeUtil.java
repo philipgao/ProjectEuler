@@ -9,6 +9,10 @@ package com.ssparrow.projecteuler;
  */
 public class PrimeUtil {
 
+	/**
+	 * @param n
+	 * @return
+	 */
 	public static int [] getAllPrimeBelowN(int n){
 		if(n==1){
 			return new int[]{1};
@@ -48,6 +52,26 @@ public class PrimeUtil {
 		
 	}
 	
+	/**
+	 * @param number
+	 * @return
+	 */
+	public static boolean isPrime(int number){
+		int [] primes=getAllPrimeBelowN(number);
+		
+		for(int i=1;i<primes.length;i++){
+			if(number!=primes[i] && number%primes[i]==0){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * @param number
+	 * @return
+	 */
 	public static int [] getAllDivisors(int number){
 		int [] divisors=new int[number];
 		divisors[0]=1;
