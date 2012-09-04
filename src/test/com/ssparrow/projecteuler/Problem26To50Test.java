@@ -5,6 +5,8 @@ package com.ssparrow.projecteuler;
 
 import static org.junit.Assert.*;
 
+import java.math.BigInteger;
+
 import org.junit.Test;
 
 /**
@@ -30,5 +32,14 @@ public class Problem26To50Test {
 		assertEquals(new Pair(-15, 97), Problem26To50.p027GetQuadraticEexpressionWithMaxNumberOfPrimes(100, 100));
 
 		assertEquals(new Pair(-61, 971), Problem26To50.p027GetQuadraticEexpressionWithMaxNumberOfPrimes(1000, 1000));
+	}
+	
+	@Test
+	public void testP028GetDiagonalSumOfSpiralArray(){
+		assertEquals(BigInteger.valueOf(101), Problem26To50.p028GetDiagonalSumOfSpiralArray(5));
+
+		assertEquals(BigInteger.valueOf(692101), Problem26To50.p028GetDiagonalSumOfSpiralArray(101));
+		
+		assertEquals(BigInteger.valueOf(669171001), Problem26To50.p028GetDiagonalSumOfSpiralArray(1001));
 	}
 }
