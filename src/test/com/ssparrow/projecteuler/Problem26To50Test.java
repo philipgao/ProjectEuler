@@ -42,4 +42,13 @@ public class Problem26To50Test {
 		
 		assertEquals(BigInteger.valueOf(669171001), Problem26To50.p028GetDiagonalSumOfSpiralArray(1001));
 	}
+	
+	@Test
+	public void testP029CalculateDistinctTerms(){
+		assertEquals(15, Problem26To50.p029CalculateDistinctTerms(5, 5));
+
+		assertEquals(69, Problem26To50.p029CalculateDistinctTerms(10, 10));
+		
+		assertEquals(9183, Problem26To50.p029CalculateDistinctTerms(100, 100));
+	}
 }

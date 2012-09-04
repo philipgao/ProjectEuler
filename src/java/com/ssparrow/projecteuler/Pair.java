@@ -22,6 +22,13 @@ public class Pair {
 		return result;
 	}
 	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "["+a + ", " + b + "]";
+	}
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
