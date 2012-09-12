@@ -6,6 +6,7 @@ package com.ssparrow.projecteuler;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -50,5 +51,27 @@ public class Problem26To50Test {
 		assertEquals(69, Problem26To50.p029CalculateDistinctTerms(10, 10));
 		
 		assertEquals(9183, Problem26To50.p029CalculateDistinctTerms(100, 100));
+	}
+	
+	@Test
+	public void testP030FindNumberOfNPowerSum(){
+		List<Integer> result = Problem26To50.p030FindNumberOfNPowerSum(4);
+		assertEquals(3	, result.size());
+		assertEquals(Integer.valueOf(1634)	, result.get(0));
+		assertEquals(Integer.valueOf(8208)	, result.get(1));
+		assertEquals(Integer.valueOf(9474)	, result.get(2));
+		int sum=0;
+		for(Integer number:result){
+			sum+=number;
+		}
+		assertEquals(19316, sum);
+		
+		result = Problem26To50.p030FindNumberOfNPowerSum(5);
+		assertEquals(6	, result.size());
+		sum=0;
+		for(Integer number:result){
+			sum+=number;
+		}
+		assertEquals(443839, sum);
 	}
 }

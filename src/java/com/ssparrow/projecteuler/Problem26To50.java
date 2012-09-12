@@ -4,7 +4,9 @@
 package com.ssparrow.projecteuler;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -244,5 +246,45 @@ public class Problem26To50 {
 		}
 		
 		return (limit1-1)*(limit2-1)-redundantTerms.size();
+	}
+	
+	
+	/**
+	 * Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
+	 * 
+	 * 1634 = 1^4 + 6^4 + 3^4 + 4^4
+	 * 8208 = 8^4 + 2^4 + 0^4 + 8^4
+	 * 9474 = 9^4 + 4^4 + 7^4 + 4^4
+	 * As 1 = 1^4 is not a sum it is not included.
+	 * 
+	 * The sum of these numbers is 1634 + 8208 + 9474 = 19316.
+	 * 
+	 * Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+	 * @param n
+	 * @return
+	 */
+	public static List<Integer> p030FindNumberOfNPowerSum(int n){
+		List<Integer> result=new ArrayList<Integer>();
+				
+		for(int k=2;Math.pow(10, k-1)<=k*Math.pow(9, n);k++){
+			int start=(int) Math.pow(10, k-1);
+			int end=(int) (Math.pow(10, k)-1);
+			
+			for(int number=start;number<=end;number++){
+				int sum = 0;
+				
+				int temp=number;
+				while(temp>0){
+					sum+=Math.pow(temp%10, n);
+					temp=temp/10;
+				}
+				
+				if(sum==number){
+					result.add(number);
+				}
+			}
+		}
+		
+		return result;
 	}
 }
