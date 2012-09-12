@@ -74,4 +74,15 @@ public class Problem26To50Test {
 		}
 		assertEquals(443839, sum);
 	}
+	
+	
+	@Test
+	public void testP031FindCoinCombinations(){
+		//5, 2 2 1, 2 1 1 1, 11111
+		assertEquals(4, Problem26To50.p031FindCoinCombinations(5, 200));
+
+		assertEquals(11, Problem26To50.p031FindCoinCombinations(10, 200));
+		
+		assertEquals(73682, Problem26To50.p031FindCoinCombinations(200, 200));
+	}
 }

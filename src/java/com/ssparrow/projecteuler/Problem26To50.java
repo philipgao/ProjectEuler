@@ -287,4 +287,59 @@ public class Problem26To50 {
 		
 		return result;
 	}
+	
+	/**
+	 * In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
+	 * 
+	 * 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
+	 * It is possible to make £2 in the following way:
+	 * 
+	 * 1£1 + 150p + 220p + 15p + 12p + 31p
+	 * How many different ways can £2 be made using any number of coins?
+	 * @param value
+	 * @param coin
+	 * @return
+	 */
+	public static int p031FindCoinCombinations(int value, int coin){
+		if(value==0){
+			return 1;
+		}else if(coin==0){
+			return 0;
+		}
+		
+		int nextCoin;
+		switch (coin) {
+		case 200:
+			nextCoin=100;
+			break;
+		case 100:
+			nextCoin=50;
+			break;
+		case 50:
+			nextCoin=20;
+			break;
+		case 20:
+			nextCoin=10;
+			break;
+		case 10:
+			nextCoin=5;
+			break;
+		case 5:
+			nextCoin=2;
+			break;
+		case 2:
+			nextCoin=1;
+			break;
+		default:
+			nextCoin=0;
+			break;
+		}
+		
+		int sum=0;
+		for(int i=0;i*coin<=value;i++){
+			sum+=p031FindCoinCombinations(value-(i*coin), nextCoin);
+		}
+		
+		return sum;
+	}
 }
