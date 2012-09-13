@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -84,5 +86,16 @@ public class Problem26To50Test {
 		assertEquals(11, Problem26To50.p031FindCoinCombinations(10, 200));
 		
 		assertEquals(73682, Problem26To50.p031FindCoinCombinations(200, 200));
+	}
+	
+	@Test
+	public void testP032FindAllPandigitalNumber(){
+		Map<Integer, Pair> allPandigitalNumber = Problem26To50.p032FindAllPandigitalNumber();
+		Set<Integer> keySet = allPandigitalNumber.keySet();
+		int sum=0;
+		for(Integer number:keySet){
+			sum+=number;
+		}
+		assertEquals(45228, sum);
 	}
 }

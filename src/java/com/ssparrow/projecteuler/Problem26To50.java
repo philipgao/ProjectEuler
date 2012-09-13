@@ -5,8 +5,10 @@ package com.ssparrow.projecteuler;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -341,5 +343,149 @@ public class Problem26To50 {
 		}
 		
 		return sum;
+	}
+	
+	/**
+	 * We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; 
+	 * for example, the 5-digit number, 15234, is 1 through 5 pandigital.
+	 * 
+	 * The product 7254 is unusual, as the identity, 39  186 = 7254, containing multiplicand, multiplier, and product is 1 through 9 pandigital.
+	 * 
+	 * Find the sum of all products whose multiplicand/multiplier/product identity can be written as a 1 through 9 pandigital.
+	 * 
+	 * 
+	 * HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
+	 * @return
+	 */
+	public static Map<Integer, Pair> p032FindAllPandigitalNumber(){
+		boolean [] used=new  boolean[9];
+		
+		Map<Integer, Pair> result=new HashMap<Integer, Pair>();
+		int [] number = new int[4];
+		findAllPandigitalNumber(result, used, number, 0);
+		
+		return result;
+	}
+	
+	private static void findAllPandigitalNumber(Map<Integer, Pair> result, boolean [] used, int [] number, int position){
+		if(position==4){
+			int value=number[0]*1000+number[1]*100+number[2]*10+number[3];
+			Pair pandigitalMultipliers = getPandigitalMultipliers(value, used);
+			if(pandigitalMultipliers!=null){
+				result.put(value, pandigitalMultipliers);
+			}
+			return;
+		}
+		
+		for(int i=0;i<used.length;i++){
+			if(!used[i]){
+				number[position]=i+1;
+				
+				used[i]=true;
+				findAllPandigitalNumber(result, used, number, position+1);
+				used[i]=false;
+			}
+		}
+	}
+	
+	private static Pair getPandigitalMultipliers(int value, boolean [] used){
+		//find possible xxxx=x*xxxx
+		for(int i=0;i<used.length;i++){
+			if(!used[i]){
+				int oneDigitNumber=i+1;
+				
+				used[i]=true;
+				int [] fourDigitsNumber=new int [4];
+				Pair pair = get1x4PandigitalMultipliers(value, used, oneDigitNumber, fourDigitsNumber, 0);
+				used[i]=false;
+				
+				if(pair!=null){
+					return pair;
+				}
+			}
+		}
+		
+		//find possible xxxx=xx*xxx
+		int [] twoDigitNumber = new int[2];
+		return get2x3PandigitalMultipliers(value, used, twoDigitNumber, 0);
+	}
+	
+	private static Pair get1x4PandigitalMultipliers(int value, boolean [] used, int oneDigitNumber, int [] fourDigitsNumber, int position){
+		if(position==4){
+			int fourDigitsNumberValue=fourDigitsNumber[0]*1000+fourDigitsNumber[1]*100+fourDigitsNumber[2]*10+fourDigitsNumber[3];
+			if(value==oneDigitNumber*fourDigitsNumberValue){
+				return new Pair(oneDigitNumber, fourDigitsNumberValue);
+			}
+			return null;
+		}
+		
+		for(int i=0;i<used.length;i++){
+			if(!used[i]){
+				fourDigitsNumber[position]=i+1;
+				
+				used[i]=true;
+				
+				Pair pair = get1x4PandigitalMultipliers(value, used, oneDigitNumber, fourDigitsNumber, position+1);
+				
+				used[i]=false;
+				
+				if(pair!=null){
+					return pair;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Pair get2x3PandigitalMultipliers(int value, boolean [] used, int [] twoDigitNumber, int position){
+		if(position==2){
+			int twoDigitNumberValue=twoDigitNumber[0]*10+twoDigitNumber[1];
+			int [] threeDigitsNumber=new int [3];
+			return get2x3PandigitalMultipliers(value, used, twoDigitNumberValue, threeDigitsNumber, 0);
+		}
+		
+		for(int i=0;i<used.length;i++){
+			if(!used[i]){
+				twoDigitNumber[position]=i+1;
+				
+				used[i]=true;
+				
+				Pair pair = get2x3PandigitalMultipliers(value, used, twoDigitNumber, position+1);
+				
+				used[i]=false;
+				
+				if(pair!=null){
+					return pair;
+				}
+			}
+		}
+		return null;
+	}
+	
+	private static Pair get2x3PandigitalMultipliers(int value, boolean [] used,int twoDigitNumberValue, int [] threeDigitsNumber, int position){
+		if(position==3){
+			int threeDigitsNumberValue=threeDigitsNumber[0]*100+threeDigitsNumber[1]*10+threeDigitsNumber[2];
+			if(value==twoDigitNumberValue*threeDigitsNumberValue){
+				return new Pair(twoDigitNumberValue, threeDigitsNumberValue);
+			}
+			return null;
+		}
+		
+		for(int i=0;i<used.length;i++){
+			if(!used[i]){
+				threeDigitsNumber[position]=i+1;
+				
+				used[i]=true;
+				
+				Pair pair = get2x3PandigitalMultipliers(value, used, twoDigitNumberValue, threeDigitsNumber, position+1);
+				
+				used[i]=false;
+				
+				if(pair!=null){
+					return pair;
+				}
+			}
+		}
+		return null;
 	}
 }
