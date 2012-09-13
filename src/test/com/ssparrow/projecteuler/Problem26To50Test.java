@@ -6,6 +6,7 @@ package com.ssparrow.projecteuler;
 import static org.junit.Assert.*;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -97,5 +98,10 @@ public class Problem26To50Test {
 			sum+=number;
 		}
 		assertEquals(45228, sum);
+	}
+	
+	@Test
+	public void testP033GetLowestCommonDenominatorForCuriousFractions(){
+		assertEquals(100, Problem26To50.p033GetLowestCommonDenominatorForCuriousFractions());
 	}
 }

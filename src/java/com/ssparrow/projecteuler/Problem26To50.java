@@ -488,4 +488,60 @@ public class Problem26To50 {
 		}
 		return null;
 	}
+	
+	/**
+	 * The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which is correct, is obtained by cancelling the 9s.
+	 *
+	 * We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+	 * 
+	 * There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.
+	 * 
+	 * If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
+	 * 
+	 * @return
+	 */
+	public static int p033GetLowestCommonDenominatorForCuriousFractions(){
+		List<Pair> curiousFractions=new ArrayList<Pair>();
+		List<Pair> equvalentFractions=new ArrayList<Pair>();
+		
+		for(int numerator=11;numerator<100;numerator++){
+			if(numerator%10!=0){
+				int start=(numerator%10)*10+1;
+				int end=(numerator%10)*10+9;
+				
+				for(int denominator=start;denominator<=end;denominator++){
+					if(numerator<denominator){
+						int eqNumerator=numerator/10;
+						int eqDenomiator=denominator%10;
+						
+						if((double)numerator/(double)denominator == (double)eqNumerator/(double)eqDenomiator){
+							curiousFractions.add(new Pair(numerator, denominator));
+							equvalentFractions.add(new Pair(eqNumerator, eqDenomiator));
+						}
+					}
+				}
+			}
+		}
+		
+		int denomProduct=1;
+		for(Pair pair:equvalentFractions){
+			int num = pair.getA();
+			int denom = pair.getB();
+			
+			denomProduct=denomProduct*denom;
+			
+			if(denomProduct%num==0){
+				denomProduct=denomProduct/num;
+			}else{
+				int[] numDivisors = PrimeUtil.getAllDivisors(num);
+				for(int i=numDivisors.length-1;i>=0;i--){
+					if(denomProduct%numDivisors[i]==0){
+						denomProduct=denomProduct/numDivisors[i];
+						break;
+					}
+				}
+			}
+		}
+		return denomProduct;
+	}
 }

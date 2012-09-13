@@ -5,6 +5,9 @@ package com.ssparrow.projecteuler;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 /**
@@ -40,6 +43,15 @@ public class PrimeUtilTest {
 			sum+=allDivisors[i];
 		}
 		assertEquals(220, sum);
+	}
+
+	
+	@Test
+	public void testGetLowestCommonDenominator(){
+		List<Pair> fractions=new ArrayList<Pair>();
+		fractions.add(new Pair(5, 12));
+		fractions.add(new Pair(11, 18));
+		assertEquals(36, PrimeUtil.getLowestCommonDenominator(fractions));
 	}
 
 }

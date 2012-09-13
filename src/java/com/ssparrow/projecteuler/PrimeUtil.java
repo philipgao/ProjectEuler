@@ -3,6 +3,8 @@
  */
 package com.ssparrow.projecteuler;
 
+import java.util.List;
+
 /**
  * @author Gao, Fei
  *
@@ -118,6 +120,58 @@ public class PrimeUtil {
 		}
 		
 		return divisorIndex;
+	}
+	
+	/**
+	 * @param fractions
+	 * @return
+	 */
+	public static int getLowestCommonDenominator(List<Pair> fractions){
+		int max=0;
+		for(Pair pair:fractions){
+			if(pair.getB()>max){
+				max=pair.getB();
+			}
+		}
+		
+		int [] primeList=PrimeUtil.getAllPrimeBelowN(max);
+		int [][] allPrimeExp = new int[fractions.size()][primeList.length];
+		int index=0;
+		for(Pair pair:fractions){
+			int number = pair.getB();
+			for(int i=1;i<primeList.length && primeList[i]<=number;i++){
+				if(number%primeList[i]==0){
+					int temp=number;
+					int exp=0;
+					while(temp%primeList[i]==0){
+						exp++;
+						temp=temp/primeList[i];
+					}
+					
+					allPrimeExp[index][i]=exp;
+				}
+			}
+			index++;
+		}
+		
+		int [] primeExp=new int[primeList.length];
+		for(int i=1;i<primeList.length;i++){
+			int maxExp=0;
+			for(int j=0;j<fractions.size();j++){
+				if(allPrimeExp[j][i]>maxExp){
+					maxExp=allPrimeExp[j][i];
+				}
+			}
+			primeExp[i]=maxExp;
+		}
+		
+		int result=1;
+		for(int i=1;i<primeList.length;i++){
+			result*=Math.pow(primeList[i], primeExp[i]);
+		}
+		
+		return result;
+		
 	}
 
 }
