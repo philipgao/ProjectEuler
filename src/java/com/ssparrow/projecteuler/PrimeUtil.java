@@ -12,6 +12,9 @@ import java.util.List;
 public class PrimeUtil {
 
 	/**
+	 * return prime list equal or below n
+	 * Please notice that element 0 is kept for 1 although 1 is not prime, this is preserved for usage in special occasions
+	 * 
 	 * @param n
 	 * @return
 	 */
@@ -61,13 +64,7 @@ public class PrimeUtil {
 	public static boolean isPrime(int number){
 		int [] primes=getAllPrimeBelowN(number);
 		
-		for(int i=1;i<primes.length;i++){
-			if(number!=primes[i] && number%primes[i]==0){
-				return false;
-			}
-		}
-		
-		return true;
+		return primes.length>1 && primes[primes.length-1]==number;
 	}
 	
 	/**

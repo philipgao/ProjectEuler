@@ -577,4 +577,69 @@ public class Problem26To50 {
 		
 		return curiousNumbers;
 	}
+	
+	/**
+	 * The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+	 * 
+	 * There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+	 * 
+	 * How many circular primes are there below one million?
+	 * @param limit
+	 * @return
+	 */
+	public static List<Integer> p035FindAllCircularPrimes(int limit){
+		List<Integer> result= new ArrayList<Integer>();
+		
+		int[] primeList = PrimeUtil.getAllPrimeBelowN(limit);
+		
+		boolean [] flags=new boolean[limit+1];
+		for(int i=1;i<primeList.length;i++){
+			flags[primeList[i]]=true;
+		}
+		
+		for(int i=1;i<primeList.length;i++){
+			int prime = primeList[i];
+			
+			if(prime<10){
+				result.add(prime);
+			}else{
+				int index=0;
+				
+				int [] tempDigits=new int [7];
+				int temp=prime;
+				while(temp>0){
+					tempDigits[6-index]=temp%10;
+					temp=temp/10;
+					index++;
+				}
+				
+				int [] digits=new int[index];
+				System.arraycopy(tempDigits, 7-index, digits, 0, index);
+				
+				boolean isCircularPrime=true;
+				int length = digits.length;
+				for(int j=1;j<length;j++){
+					if(digits[j]>0){
+						int number=0;
+						for(int k=0;k<length;k++){
+							int digitIndex=(j+k)>=length?(j+k-length):(j+k);
+							number+=digits[digitIndex] * Math.pow(10, length-1-k);
+						}
+						
+						if(!flags[number]){
+							isCircularPrime=false;
+							break;
+						}
+					}
+				}
+				
+				if(isCircularPrime){
+					result.add(prime);
+				}
+				
+			}
+		}
+		
+		return result;
+	}
 }

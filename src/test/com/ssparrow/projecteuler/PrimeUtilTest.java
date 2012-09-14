@@ -44,6 +44,21 @@ public class PrimeUtilTest {
 		}
 		assertEquals(220, sum);
 	}
+	
+	@Test
+	public void testIsPrime(){
+		assertFalse(PrimeUtil.isPrime(1));
+
+		assertTrue(PrimeUtil.isPrime(2));
+
+		assertTrue(PrimeUtil.isPrime(3));
+
+		assertFalse(PrimeUtil.isPrime(4));
+
+		assertTrue(PrimeUtil.isPrime(5));
+
+		assertFalse(PrimeUtil.isPrime(6));
+	}
 
 	
 	@Test

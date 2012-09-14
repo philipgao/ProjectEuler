@@ -116,4 +116,13 @@ public class Problem26To50Test {
 		}
 		assertEquals(40730, sum);
 	}
+	
+	@Test
+	public void testP035FindAllCircularPrimes(){
+		List<Integer> circularPrimes = Problem26To50.p035FindAllCircularPrimes(100);
+		assertEquals(13, circularPrimes.size());
+		
+		circularPrimes = Problem26To50.p035FindAllCircularPrimes(1000000);
+		assertEquals(55, circularPrimes.size());
+	}
 }
