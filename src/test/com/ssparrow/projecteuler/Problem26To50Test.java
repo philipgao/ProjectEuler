@@ -104,4 +104,16 @@ public class Problem26To50Test {
 	public void testP033GetLowestCommonDenominatorForCuriousFractions(){
 		assertEquals(100, Problem26To50.p033GetLowestCommonDenominatorForCuriousFractions());
 	}
+	
+	@Test
+	public void testp034FindAllNumbersSumToDigitsFactorials(){
+		List<Integer> result = Problem26To50.p034FindAllNumbersSumToDigitsFactorials();
+		assertEquals(2, result.size());
+		
+		int sum=0;
+		for(Integer number:result){
+			sum+=number;
+		}
+		assertEquals(40730, sum);
+	}
 }

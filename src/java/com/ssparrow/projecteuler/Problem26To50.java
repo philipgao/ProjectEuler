@@ -544,4 +544,37 @@ public class Problem26To50 {
 		}
 		return denomProduct;
 	}
+	
+	/**
+	 * 45 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+	 * 
+	 * Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+	 * 
+	 * Note: as 1! = 1 and 2! = 2 are not sums they are not included.
+	 * @return
+	 */
+	public static List<Integer> p034FindAllNumbersSumToDigitsFactorials(){
+		int [] factorials=new int [10];
+		factorials[0]=1;
+		for(int i=1;i<10;i++){
+			factorials[i]=factorials[i-1]*i;
+		}
+		
+		List<Integer> curiousNumbers=new ArrayList<Integer>();
+		for(int i=3;i<10000000;i++){
+			int temp=i;
+			
+			int sum=0;
+			while(temp>0){
+				sum+=factorials[temp%10];
+				temp=temp/10;
+			}
+			
+			if(i==sum){
+				curiousNumbers.add(i);
+			}
+		}
+		
+		return curiousNumbers;
+	}
 }
