@@ -14,6 +14,13 @@ import org.junit.Test;
  *
  */
 public class Problem376To400Test {
+	
+	@Test
+	public void testP386GetSumOfAntichainChainlength(){
+		assertEquals(BigInteger.valueOf(172), Problem376To400.p386GetSumOfAntichainChainlength(100));
+
+		assertEquals(BigInteger.valueOf(315037282), Problem376To400.p386GetSumOfAntichainChainlength(100000000));
+	}
 
 	@Test
 	public void testP393GetAntRoutes() {
