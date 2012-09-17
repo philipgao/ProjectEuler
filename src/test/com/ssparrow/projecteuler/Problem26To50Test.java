@@ -125,4 +125,11 @@ public class Problem26To50Test {
 		circularPrimes = Problem26To50.p035FindAllCircularPrimes(1000000);
 		assertEquals(55, circularPrimes.size());
 	}
+	
+	@Test
+	public void testP036GetSumOfAllPalindromeNumberOnBase2And10(){
+		assertEquals(25, Problem26To50.p036GetSumOfAllPalindromeNumberOnBase2And10(10));
+
+		assertEquals(872187, Problem26To50.p036GetSumOfAllPalindromeNumberOnBase2And10(1000000));
+	}
 }

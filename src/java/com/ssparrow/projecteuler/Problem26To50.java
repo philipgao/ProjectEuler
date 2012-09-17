@@ -642,4 +642,30 @@ public class Problem26To50 {
 		
 		return result;
 	}
+	
+	/**
+	 * The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.
+	 * 
+	 * Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.
+	 * 
+	 * (Please note that the palindromic number, in either base, may not include leading zeros.)
+	 * @param limit
+	 * @return
+	 */
+	public static int p036GetSumOfAllPalindromeNumberOnBase2And10(int limit){
+		List<Integer> palindromeNumbers=new ArrayList<Integer>();
+		
+		for(int number=1;number<limit;number++){
+			if(NumberUtil.isPalindrome(number, 10) &&NumberUtil.isPalindrome(number, 2)){
+				palindromeNumbers.add(number);
+			}
+		}
+		
+		int sum=0;
+		for(Integer number:palindromeNumbers){
+			sum+=number;
+		}
+		
+		return sum;
+	}
 }

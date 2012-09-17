@@ -131,7 +131,7 @@ public class Problem1To25 {
 		for(int first=100;first<=999;first++){
 			for(int second=100;second<=999;second++){
 				int n =first*second;
-				if(!visited.get(n) && isPalindrome(n)){
+				if(!visited.get(n) && NumberUtil.isPalindrome(n)){
 					if(n>max){
 						max=n;
 					}
@@ -140,30 +140,6 @@ public class Problem1To25 {
 		}
 		
 		return max;
-	}
-	
-	public static boolean isPalindrome(int n){
-		String nStr=String.valueOf(n);
-		
-		int forwardIndex=0;
-		int backIndex=0;
-		int fastIndex=0;
-		
-		for(;forwardIndex<nStr.length();forwardIndex++,fastIndex+=2){
-			if(fastIndex==nStr.length()-1){
-				backIndex=forwardIndex-1;
-			}else if(fastIndex==nStr.length()){
-				backIndex=forwardIndex-1;
-				forwardIndex--;
-			}else if(fastIndex>nStr.length()){
-				if(nStr.charAt(backIndex)!=nStr.charAt(forwardIndex)){
-					return false;
-				}
-				backIndex--;
-			}
-		}
-		
-		return true;
 	}
 	
 	/**

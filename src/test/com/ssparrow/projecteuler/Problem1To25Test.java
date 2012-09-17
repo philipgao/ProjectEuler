@@ -84,15 +84,15 @@ public class Problem1To25Test {
 
 	@Test
 	public void testP004FindLargestPalindromicNumber(){
-		assertTrue(Problem1To25.isPalindrome(101));
+		assertTrue(NumberUtil.isPalindrome(101));
 
-		assertTrue(Problem1To25.isPalindrome(111));
+		assertTrue(NumberUtil.isPalindrome(111));
 
-		assertTrue(Problem1To25.isPalindrome(1001));
+		assertTrue(NumberUtil.isPalindrome(1001));
 
-		assertFalse(Problem1To25.isPalindrome(1011));
+		assertFalse(NumberUtil.isPalindrome(1011));
 		
-		assertTrue(Problem1To25.isPalindrome(11211));
+		assertTrue(NumberUtil.isPalindrome(11211));
 		
 		assertEquals(906609, Problem1To25.p004FindLargestPalindromicNumber());
 	}
