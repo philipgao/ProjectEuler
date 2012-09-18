@@ -668,4 +668,97 @@ public class Problem26To50 {
 		
 		return sum;
 	}
+	
+	/**
+	 * The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right, and remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
+	 * 
+	 * Find the sum of the only eleven primes that are both truncatable from left to right and right to left.
+	 * 
+	 * NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
+	 * 
+	 * @return
+	 */
+	public static int p037FindSumOfTruncatablePrimes(){
+		int limit = 10000000;
+		boolean [] flags=new boolean[limit+1];
+		flags[0]=true;
+		flags[1]=true;
+		
+		List<Integer> result=new ArrayList<Integer>();
+		int currentPrime=2;
+		while(true){
+			if(isTrunctablePrime(currentPrime, flags)){
+				result.add(currentPrime);
+			}
+			
+			for(int i=2;i*currentPrime<=limit;i++){
+				flags[i*currentPrime]=true;
+			}
+			
+			boolean foundPrime=false;
+			for(int j=currentPrime+1;j<=limit;j++){
+				if(!flags[j]){
+					currentPrime=j;
+					foundPrime=true;
+					break;
+				}
+			}
+			
+			if(!foundPrime){
+				break;
+			}
+		}
+		
+		int sum=0;
+		for(Integer number:result){
+			sum+=number;
+		}
+		
+		return sum;
+	}
+	
+
+
+	
+	/**
+	 * @param prime
+	 * @param flags
+	 * @return
+	 */
+	public static boolean isTrunctablePrime(int prime, boolean[] flags){
+		if(prime<10){
+			return false;
+		}
+		
+		int [] allDigits = new int [10];
+		
+		int index=0;
+		int temp=prime;
+		while(temp>0){
+			allDigits[10-1-index]=temp%10;
+			temp=temp/10;
+			index++;
+		}
+		
+		int [] digits=new int[index];
+		System.arraycopy(allDigits, 10-index, digits, 0, index);
+		
+		int number=0;
+		for(int i=0;i<digits.length-1;i++){
+			number= number+digits[digits.length-1-i]*(int)Math.pow(10, i);
+			if(flags[number]){
+				return false;
+			}
+		}
+		
+		number=0;
+		for(int i=0;i<digits.length-1;i++){
+			number=number*10+digits[i];
+			if(flags[number]){
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

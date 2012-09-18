@@ -132,4 +132,9 @@ public class Problem26To50Test {
 
 		assertEquals(872187, Problem26To50.p036GetSumOfAllPalindromeNumberOnBase2And10(1000000));
 	}
+	
+	@Test
+	public void testP037FindSumOfTruncatablePrimes(){
+		assertEquals(748317, Problem26To50.p037FindSumOfTruncatablePrimes());
+	}
 }
