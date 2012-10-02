@@ -137,4 +137,9 @@ public class Problem26To50Test {
 	public void testP037FindSumOfTruncatablePrimes(){
 		assertEquals(748317, Problem26To50.p037FindSumOfTruncatablePrimes());
 	}
+	
+	@Test
+	public void testP038FindLargestPandigitNumberFormedByConcatProducts(){
+		assertEquals(932718654, Problem26To50.p038FindLargestPandigitNumberFormedByConcatProducts());
+	}
 }

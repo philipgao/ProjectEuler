@@ -761,4 +761,95 @@ public class Problem26To50 {
 		
 		return true;
 	}
+	
+	/**
+	 * @return
+	 */
+	public static int p038FindLargestPandigitNumberFormedByConcatProducts(){
+		boolean [] used =new boolean [9];
+		int [] digits=new int[9];
+		return findLargestPandigitNumberFormedByConcatProducts(used, digits, 0);
+	}
+	
+	private static int findLargestPandigitNumberFormedByConcatProducts(boolean [] used, int [] digits, int position){
+		if(position==9){
+			if(isFormedByConcatProducts(digits)){
+				return getNumber(digits, 0, 9);
+			}
+			return -1;
+		}
+		
+		for(int i=0;i<digits.length;i++){
+			if(!used[i]){
+				used[i]=true;
+				
+				digits[position]=9-i;
+				int result = findLargestPandigitNumberFormedByConcatProducts(used, digits, position+1);
+				
+				if(result>0){
+					return result;
+				}
+				
+				used[i]=false;
+			}
+		}
+		
+		return -1;
+	}
+	
+	private static  boolean isFormedByConcatProducts(int [] digits){
+		for(int l=1;l<5;l++){
+			int start=0;
+
+			int firstNumber=getNumber(digits, start, l);
+			
+			int times=2;
+			int nextNumber=firstNumber*times;
+			int nextNumberLength = getNumberLength(nextNumber);
+			
+			start=start+l;
+			while(digits.length-start>=nextNumberLength){
+				if(getNumber(digits, start, nextNumberLength)!=nextNumber){
+					break;
+				}
+				
+				start=start+nextNumberLength;
+				times++;
+				nextNumber=firstNumber*times;
+				nextNumberLength = getNumberLength(nextNumber);
+			}
+			
+			if(start==digits.length){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	private static int getNumber(int [] digits, int start, int length){
+		int end=start+length-1;
+		
+		int index=start;
+		int number=0;
+		while(index<=end){
+			number=number*10+digits[index];
+			index++;
+		}
+		
+		return number;
+	}
+
+	/**
+	 * @param number
+	 * @return
+	 */
+	private static int getNumberLength(int number) {
+		int numberLength=0;
+		while(number>0){
+			numberLength++;
+			number=number/10;
+		}
+		return numberLength;
+	}
 }
