@@ -142,4 +142,9 @@ public class Problem26To50Test {
 	public void testP038FindLargestPandigitNumberFormedByConcatProducts(){
 		assertEquals(932718654, Problem26To50.p038FindLargestPandigitNumberFormedByConcatProducts());
 	}
+	
+	@Test
+	public void testP039FindMaxNumberOfSolution(){
+		assertEquals(new Pair(840, 8), Problem26To50.p039FindMaxNumberOfSolution(1000));
+	}
 }

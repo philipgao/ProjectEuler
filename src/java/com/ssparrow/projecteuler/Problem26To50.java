@@ -763,6 +763,17 @@ public class Problem26To50 {
 	}
 	
 	/**
+	 * Take the number 192 and multiply it by each of 1, 2, and 3:
+	 * 
+	 * 192  1 = 192
+	 * 192  2 = 384
+	 * 192  3 = 576
+	 * By concatenating each product we get the 1 to 9 pandigital, 192384576. We will call 192384576 the concatenated product of 192 and (1,2,3)
+	 * 
+	 * The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5, giving the pandigital, 918273645, 
+	 * which is the concatenated product of 9 and (1,2,3,4,5).
+	 * 
+	 * What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n  1?
 	 * @return
 	 */
 	public static int p038FindLargestPandigitNumberFormedByConcatProducts(){
@@ -851,5 +862,43 @@ public class Problem26To50 {
 			number=number/10;
 		}
 		return numberLength;
+	}
+	
+	/**
+	 * If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
+	 * 
+	 * {20,48,52}, {24,45,51}, {30,40,50}
+	 * 
+	 * For which value of p  1000, is the number of solutions maximised?
+	 * 
+	 * @param limit
+	 * @return
+	 */
+	public static Pair p039FindMaxNumberOfSolution(int limit){
+		Map<Integer, List<Triplet>> solutionMap=new HashMap<Integer, List<Triplet>>();
+		
+		int max=0;
+		int number=0;
+		for(int sum=limit;sum>3;sum--){
+			List<Triplet> solutions =new ArrayList<Triplet>();
+			for(int c=sum/3+1;c<=sum/2;c++){
+				for(int a=1;a<=(sum-c)/2;a++){
+					int b=sum-a-c;
+					if((a*a+b*b)==c*c){
+						solutions.add(new Triplet(a, b, c));
+					}
+				}
+			}
+			if(solutions.size()>max){
+				max=solutions.size();
+				number=sum;
+			}
+			
+			if(solutions.size()>0){
+				solutionMap.put(sum, solutions);
+			}
+		}
+		
+		return new Pair(number, solutionMap.get(number).size());
 	}
 }
