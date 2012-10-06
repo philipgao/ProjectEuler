@@ -58,6 +58,10 @@ public class PrimeUtilTest {
 		assertTrue(PrimeUtil.isPrime(5));
 
 		assertFalse(PrimeUtil.isPrime(6));
+		
+		assertTrue(PrimeUtil.isPrime(98765431));
+
+		assertFalse(PrimeUtil.isPrime(987654321));
 	}
 
 	

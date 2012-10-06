@@ -62,9 +62,20 @@ public class PrimeUtil {
 	 * @return
 	 */
 	public static boolean isPrime(int number){
-		int [] primes=getAllPrimeBelowN(number);
+		if(number==1){
+			return false;
+		}
 		
-		return primes.length>1 && primes[primes.length-1]==number;
+		int squareRoot=(int) Math.sqrt(number);
+		int [] primes=getAllPrimeBelowN(squareRoot);
+		
+		for(int i=1;i<primes.length;i++){
+			if(number%primes[i]==0){
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	/**

@@ -172,4 +172,9 @@ public class Problem26To50Test {
 		
 		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(73));
 	}
+	
+	@Test
+	public void testP041FindLargestPandigitPrime(){
+		assertEquals(7652413, Problem26To50.p041FindLargestPandigitPrime());
+	}
 }

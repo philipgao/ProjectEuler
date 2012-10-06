@@ -5,6 +5,7 @@ package com.ssparrow.projecteuler;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -950,5 +951,53 @@ public class Problem26To50 {
 			numLength++;
 			
 		}
+	}
+	
+	/**
+	 * We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once. For example, 2143 is a 4-digit pandigital and is also prime.
+	 * 
+	 * What is the largest n-digit pandigital prime that exists?
+	 * @return
+	 */
+	public static int p041FindLargestPandigitPrime(){
+		for(int digitNum=9;digitNum>=1;digitNum--){
+			int [] number=new int[digitNum];
+			boolean [] used=new boolean[digitNum];
+			
+			int result = findLargestPandigitPrime(number, used, 0);
+			if(result>0){
+				return result;
+			}
+		}
+		
+		return -1;
+	}
+	
+	private static int findLargestPandigitPrime(int [] number, boolean [] used, int position){
+		if(position==number.length){
+			int value=getNumber(number, 0, number.length);
+			
+			if(number[number.length-1]%2!=0 && PrimeUtil.isPrime(value)){
+				return value;
+			}
+			
+			return -1;
+		}
+		
+		for(int i=0;i<number.length;i++){
+			if(!used[i]){
+				used[i]=true;
+				
+				number[position]=number.length-i;
+				int result = findLargestPandigitPrime(number, used, position+1);
+				if(result>0){
+					return result;
+				}
+				
+				used[i]=false;
+			}
+		}
+		
+		return -1;
 	}
 }
