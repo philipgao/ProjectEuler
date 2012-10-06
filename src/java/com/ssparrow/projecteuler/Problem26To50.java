@@ -901,4 +901,54 @@ public class Problem26To50 {
 		
 		return new Pair(number, solutionMap.get(number).size());
 	}
+	
+	/**
+	 * An irrational decimal fraction is created by concatenating the positive integers:
+	 * 
+	 * 0.123456789101112131415161718192021...
+	 * 
+	 * It can be seen that the 12th digit of the fractional part is 1.
+	 * 
+	 * If dn represents the nth digit of the fractional part, find the value of the following expression.
+	 * 
+	 * d1  d10  d100  d1000  d10000  d100000  d1000000
+	 * @param n
+	 * @return
+	 */
+	public static int p040FindDigitOfIrrationalFraction(int n){
+		int numLength=1;
+		int numStart=1;
+		int digitStart=1;
+		
+		while(true){
+			int numCount=(int) (Math.pow(10, numLength)-Math.pow(10,numLength-1));
+			int totalDigits=numLength*numCount;
+			int digitEnd=digitStart+totalDigits-1;
+			
+			if(n<=digitEnd){
+				int length=n-digitStart+1;
+				
+				if(length%numLength==0){
+					return (length/numLength+numStart-1)%10;
+				}else{
+					int index=length%numLength;
+					int number = length/numLength+numStart;
+					
+					int i=0;
+					int [] numDigits=new int[numLength];
+					while(number>0){
+						numDigits[i++]=number%10;
+						number=number/10;
+					}
+					
+					return numDigits[numLength-index];
+				}
+			}
+			
+			numStart=(int) Math.pow(10, numLength);
+			digitStart=digitEnd+1;
+			numLength++;
+			
+		}
+	}
 }

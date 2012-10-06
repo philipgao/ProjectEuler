@@ -147,4 +147,29 @@ public class Problem26To50Test {
 	public void testP039FindMaxNumberOfSolution(){
 		assertEquals(new Pair(840, 8), Problem26To50.p039FindMaxNumberOfSolution(1000));
 	}
+	
+	@Test
+	public void testP040FindDigitOfIrrationalFraction(){
+		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(1));
+		
+		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(10));
+
+		assertEquals(5, Problem26To50.p040FindDigitOfIrrationalFraction(100));
+
+		assertEquals(3, Problem26To50.p040FindDigitOfIrrationalFraction(1000));
+
+		assertEquals(7, Problem26To50.p040FindDigitOfIrrationalFraction(10000));
+
+		assertEquals(2, Problem26To50.p040FindDigitOfIrrationalFraction(100000));
+
+		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(1000000));
+
+		assertEquals(0, Problem26To50.p040FindDigitOfIrrationalFraction(11));
+		
+		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(12));
+
+		assertEquals(4, Problem26To50.p040FindDigitOfIrrationalFraction(72));
+		
+		assertEquals(1, Problem26To50.p040FindDigitOfIrrationalFraction(73));
+	}
 }
