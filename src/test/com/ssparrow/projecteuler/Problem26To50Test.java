@@ -177,4 +177,9 @@ public class Problem26To50Test {
 	public void testP041FindLargestPandigitPrime(){
 		assertEquals(7652413, Problem26To50.p041FindLargestPandigitPrime());
 	}
+	
+	@Test
+	public void testP042FindAllTriangleWords() throws Exception{
+		assertEquals(162, Problem26To50.p042FindAllTriangleWords("test/data/p042.txt").size());
+	}
 }

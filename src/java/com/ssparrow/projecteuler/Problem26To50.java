@@ -3,7 +3,11 @@
  */
 package com.ssparrow.projecteuler;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
@@ -11,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 /**
  * @author Gao, Fei
@@ -999,5 +1004,70 @@ public class Problem26To50 {
 		}
 		
 		return -1;
+	}
+	
+	/**
+	 * The nth term of the sequence of triangle numbers is given by, tn = ½n(n+1); so the first ten triangle numbers are:
+	 * 
+	 * 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+	 * 
+	 * By converting each letter in a word to a number corresponding to its alphabetical position and adding these values we form a word value. For example, the word value for SKY is 19 + 11 + 25 = 55 = t10. If the word value is a triangle number then we shall call the word a triangle word.
+	 * 
+	 * Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words, how many are triangle words?
+	 * @param filename
+	 * @return
+	 * @throws Exception
+	 */
+	public static List<String> p042FindAllTriangleWords(String filename) throws Exception{
+		int n=1;
+		int t=1;
+		
+		Set<Integer> triangleNumbers=new HashSet<Integer>();
+		while(t<=26*50){
+			triangleNumbers.add(t);
+			
+			n++;
+			t=(n*(n+1))/2;
+		}
+		
+		List<String> result=new ArrayList<String>();
+		FileChannel channel=new FileInputStream(filename).getChannel();
+		ByteBuffer buffer= ByteBuffer.allocate((int) channel.size()+1);
+		
+		int read;
+		String prefix="";
+		while((read=channel.read(buffer))!=-1){
+			String record=prefix + new String(buffer.array());
+			
+			prefix="";
+			if(!record.endsWith(",") && !record.endsWith("\"")){
+				prefix=record.substring(record.lastIndexOf("\"")+1);
+				record=record.substring(0, record.lastIndexOf('\"'));
+			}
+			
+			StringTokenizer st=new StringTokenizer(record,"\", ");
+			while(st.hasMoreElements()){
+				String word=(String) st.nextElement();
+				
+				int value=0;
+				for(int i=0;i<word.length();i++){
+					int charValue=word.charAt(i)-'A'+1;
+					if(charValue>=1 && charValue<=26){
+						value+=charValue;
+					}else{
+						return null;
+					}
+				}
+				
+				if(triangleNumbers.contains(value)){
+					result.add(word);
+				}
+			}
+			
+			buffer.clear();
+		}
+		
+		
+		return result;
 	}
 }
