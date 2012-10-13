@@ -856,6 +856,20 @@ public class Problem26To50 {
 		
 		return number;
 	}
+	
+	private static BigInteger getBigNumber(int [] digits, int start, int length){
+		BigInteger number=BigInteger.ZERO;
+		
+		int end=start+length-1;
+		
+		int index=start;
+		while(index<=end){
+			number=number.multiply(BigInteger.valueOf(10)).add(BigInteger.valueOf(digits[index]));
+			index++;
+		}
+		
+		return number;
+	}
 
 	/**
 	 * @param number
@@ -1069,5 +1083,74 @@ public class Problem26To50 {
 		
 		
 		return result;
+	}
+	
+	/**
+	 * The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a rather interesting sub-string divisibility property.
+	 * 
+	 * Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note the following:
+	 * 
+	 * d2d3d4=406 is divisible by 2
+	 * d3d4d5=063 is divisible by 3
+	 * d4d5d6=635 is divisible by 5
+	 * d5d6d7=357 is divisible by 7
+	 * d6d7d8=572 is divisible by 11
+	 * d7d8d9=728 is divisible by 13
+	 * d8d9d10=289 is divisible by 17
+	 * Find the sum of all 0 to 9 pandigital numbers with this property.
+	 * @return
+	 */
+	public static List<BigInteger> p043FindAllPandigitWithGivenAttributes(){
+		boolean [] flags=new boolean[10];
+		List<BigInteger> result=new ArrayList<BigInteger>();
+		
+		int []number=new int[10];
+		findAllPandigitWithGivenAttributes(result, flags, number, 0);
+		
+		return result;
+	}
+	
+	private static void findAllPandigitWithGivenAttributes(List<BigInteger> result, boolean [] flags, int [] number, int position){
+		if(position==flags.length){
+			int d1 = getNumber(number, 1, 3);
+			if(d1%2!=0){
+				return;
+			}
+			int d2 = getNumber(number, 2, 3);
+			if(d2%3!=0){
+				return;
+			}
+			int d3 = getNumber(number, 3, 3);
+			if(d3%5!=0){
+				return;
+			}
+			int d4 = getNumber(number, 4, 3);
+			if(d4%7!=0){
+				return;
+			}
+			int d5 = getNumber(number, 5, 3);
+			if(d5%11!=0){
+				return;
+			}
+			int d6 = getNumber(number, 6, 3);
+			if(d6%13!=0){
+				return;
+			}
+			int d7 = getNumber(number, 7, 3);
+			if(d7%17!=0){
+				return;
+			}
+			result.add(getBigNumber(number, 0, number.length));
+		}
+		int start=position==0?1:0;
+		for(int i=start;i<flags.length;i++){
+			if(!flags[i]){
+				flags[i]=true;
+				number[position]=i;
+				findAllPandigitWithGivenAttributes(result,flags, number, position+1);
+				flags[i]=false;
+			}
+		}
+		
 	}
 }

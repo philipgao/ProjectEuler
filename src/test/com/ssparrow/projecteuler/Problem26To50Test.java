@@ -182,4 +182,17 @@ public class Problem26To50Test {
 	public void testP042FindAllTriangleWords() throws Exception{
 		assertEquals(162, Problem26To50.p042FindAllTriangleWords("test/data/p042.txt").size());
 	}
+	
+	@Test
+	public void testP043FindAllPandigitWithGivenAttributes(){
+		List<BigInteger> result = Problem26To50.p043FindAllPandigitWithGivenAttributes();
+		assertEquals(6, result.size());
+		
+		BigInteger sum=BigInteger.ZERO;
+		for(BigInteger number:result){
+			sum=sum.add(number);
+		}
+		
+		assertEquals(new BigInteger("16695334890",10), sum);
+	}
 }
