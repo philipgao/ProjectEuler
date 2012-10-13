@@ -195,4 +195,9 @@ public class Problem26To50Test {
 		
 		assertEquals(new BigInteger("16695334890",10), sum);
 	}
+	
+	@Test
+	public void testP044FindRequiredPentagonalNumber(){
+		assertEquals(new Pair(1, 1), Problem26To50.p044FindRequiredPentagonalNumber());
+	}
 }
