@@ -1230,4 +1230,53 @@ public class Problem26To50 {
 		
 		return 0;
 	}
+	
+	/**
+	 * t was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
+	 * 
+	 * 9 = 7 + 212
+	 * 15 = 7 + 222
+	 * 21 = 3 + 232
+	 * 25 = 7 + 232
+	 * 27 = 19 + 222
+	 * 33 = 31 + 212
+	 * 
+	 * It turns out that the conjecture was false.
+	 * 
+	 * What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
+	 * @param limit
+	 * @return
+	 */
+	public static int p046FindFirstOddComposisteNumberNotMatchFormula(int limit){
+		int[] primeList = PrimeUtil.getAllPrimeBelowN(limit);
+		BitSet primeBitSet=new BitSet();
+		for(int i=1;i<primeList.length;i++){
+			primeBitSet.set(primeList[i]);
+		}
+		
+		BitSet squareBitSet=new BitSet();
+		for(int i=0;i<=Math.sqrt(limit);i++){
+			squareBitSet.set(i*i);
+		}
+		
+		for(int number=2; number<=limit;number++ ){
+			if(number%2!=0 && !primeBitSet.get(number)){
+				boolean match=false;
+				for(int i=1;i<primeList.length && primeList[i]<number;i++){
+					if(primeList[i]%2!=0){
+						int value=(number-primeList[i])/2;
+						if(squareBitSet.get(value)){
+							match=true;
+							break;
+						}
+					}
+				}
+				if(!match){
+					return number;
+				}
+			}
+		}
+		
+		return -1;
+	}
 }

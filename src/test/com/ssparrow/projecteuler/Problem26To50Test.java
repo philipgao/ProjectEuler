@@ -213,4 +213,9 @@ public class Problem26To50Test {
 		BigInteger triangle = BigInteger.valueOf(n).add(BigInteger.ONE).multiply(BigInteger.valueOf(n)).divide(BigInteger.valueOf(2));
 		assertEquals(new BigInteger("1533776805", 10), triangle);
 	}
+	
+	@Test
+	public void testP046FindFirstOddComposisteNumberNotMatchFormula(){
+		assertEquals(5777, Problem26To50.p046FindFirstOddComposisteNumberNotMatchFormula(1000000));
+	}
 }
