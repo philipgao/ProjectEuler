@@ -46,6 +46,24 @@ public class PrimeUtilTest {
 	}
 	
 	@Test
+	public void testGetPrimeFactors(){
+		assertArrayEquals(new int []{2, 3}, PrimeUtil.getPrimeFactors(6));
+
+		assertArrayEquals(new int []{2,5}, PrimeUtil.getPrimeFactors(10));
+
+		assertArrayEquals(new int []{11}, PrimeUtil.getPrimeFactors(11));
+
+		assertArrayEquals(new int []{2,5}, PrimeUtil.getPrimeFactors(20));
+
+		assertArrayEquals(new int []{2, 7}, PrimeUtil.getPrimeFactors(28));
+
+		assertArrayEquals(new int []{2, 5, 11}, PrimeUtil.getPrimeFactors(220));
+		
+		assertArrayEquals(new int []{3, 7, 13, 491}, PrimeUtil.getPrimeFactors(134043));
+		
+	}
+	
+	@Test
 	public void testIsPrime(){
 		assertFalse(PrimeUtil.isPrime(1));
 

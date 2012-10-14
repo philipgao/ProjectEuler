@@ -78,6 +78,28 @@ public class PrimeUtil {
 		return true;
 	}
 	
+	public static int [] getPrimeFactors(int number){
+		int index=0;
+		int [] tempFactors=new int[number];
+		
+		int[] primeList = getAllPrimeBelowN(number);
+		
+		int temp=number;
+		for(int i=1;i<primeList.length&&primeList[i]<=temp;i++){
+			if(temp%primeList[i]==0){
+				tempFactors[index++]=primeList[i];
+				
+				while(temp%primeList[i]==0){
+					temp=temp/primeList[i];
+				}
+			}
+		}
+		
+		int [] primeFactors=new int [index];
+		System.arraycopy(tempFactors, 0, primeFactors, 0, index);
+		
+		return primeFactors;
+	}
 	/**
 	 * @param number
 	 * @return

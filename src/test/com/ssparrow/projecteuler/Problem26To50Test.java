@@ -218,4 +218,9 @@ public class Problem26To50Test {
 	public void testP046FindFirstOddComposisteNumberNotMatchFormula(){
 		assertEquals(5777, Problem26To50.p046FindFirstOddComposisteNumberNotMatchFormula(1000000));
 	}
+	
+	@Test
+	public void testP047FindFirst4ConsecutiveNumberWith4PrimeFactors(){
+		assertEquals(134043, Problem26To50.p047FindFirst4ConsecutiveNumberWith4PrimeFactors());
+	}
 }

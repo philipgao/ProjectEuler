@@ -1279,4 +1279,51 @@ public class Problem26To50 {
 		
 		return -1;
 	}
+	
+	/**
+	 * The first two consecutive numbers to have two distinct prime factors are:
+	 * 
+	 * 14 = 2  7
+	 * 15 = 3  5
+	 * 
+	 * The first three consecutive numbers to have three distinct prime factors are:
+	 * 
+	 * 644 = 2²  7  23
+	 * 645 = 3  5  43
+	 * 646 = 2  17  19.
+	 * 
+	 * Find the first four consecutive integers to have four distinct primes factors. What is the first of these numbers?
+	 * @param limit
+	 * @return
+	 */
+	public static int p047FindFirst4ConsecutiveNumberWith4PrimeFactors(){
+		int number=2;
+		
+		while(true){
+			int[] primeFactors = PrimeUtil.getPrimeFactors(number);
+			
+			if(primeFactors.length==4){
+				int count=1;
+				while(count<4){
+					int next= number+count;
+					
+					int [] nextPrimeFactors = PrimeUtil.getPrimeFactors(next);
+
+					if(nextPrimeFactors.length!=4){
+						break;
+					}
+					
+					count++;
+				}
+				
+				if(count==4){
+					return number;
+				}
+				
+				number=number+count+1;
+			}else{
+				number++;
+			}
+		}
+	}
 }
