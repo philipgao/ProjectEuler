@@ -200,4 +200,17 @@ public class Problem26To50Test {
 	public void testP044FindRequiredPentagonalNumber(){
 		assertEquals(new Pair(1, 1), Problem26To50.p044FindRequiredPentagonalNumber());
 	}
+	
+	@Test
+	public void testP045FindNextTrianglePentagonalHexagonalNumber(){
+		assertEquals(1, Problem26To50.p045FindNextTrianglePentagonalHexagonalNumber(1));
+		
+		assertEquals(285, Problem26To50.p045FindNextTrianglePentagonalHexagonalNumber(2));
+
+		assertEquals(55385, Problem26To50.p045FindNextTrianglePentagonalHexagonalNumber(286));
+		
+		int n=55385;
+		BigInteger triangle = BigInteger.valueOf(n).add(BigInteger.ONE).multiply(BigInteger.valueOf(n)).divide(BigInteger.valueOf(2));
+		assertEquals(new BigInteger("1533776805", 10), triangle);
+	}
 }
