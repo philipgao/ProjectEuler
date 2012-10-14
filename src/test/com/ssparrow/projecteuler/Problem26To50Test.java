@@ -223,4 +223,14 @@ public class Problem26To50Test {
 	public void testP047FindFirst4ConsecutiveNumberWith4PrimeFactors(){
 		assertEquals(134043, Problem26To50.p047FindFirst4ConsecutiveNumberWith4PrimeFactors());
 	}
+	
+	@Test
+	public void testP048StringFindLast10DigitOfSeriesSum(){
+		assertEquals("0405071317", Problem26To50.p048StringFindLast10DigitOfSeriesSum(10));
+
+		assertEquals("9027641920", Problem26To50.p048StringFindLast10DigitOfSeriesSum(100));
+
+		assertEquals("9110846700", Problem26To50.p048StringFindLast10DigitOfSeriesSum(1000));
+	}
+	
 }

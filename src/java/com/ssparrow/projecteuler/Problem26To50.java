@@ -1326,4 +1326,32 @@ public class Problem26To50 {
 			}
 		}
 	}
+	
+	
+	/**
+	 * The series, 11 + 22 + 33 + ... + 1010 = 10405071317.
+	 * 
+	 * Find the last ten digits of the series, 11 + 22 + 33 + ... + 10001000.
+	 * 
+	 * @param max
+	 * @return
+	 */
+	public static String p048StringFindLast10DigitOfSeriesSum(int max){
+		BigInteger sum=BigInteger.ZERO;
+		
+		for(int i=1;i<=max;i++){
+			BigInteger number=BigInteger.valueOf(i).pow(i);
+			sum=sum.add(number);
+		}
+		
+		String result="";
+		for(int i=0;i<10;i++){
+			BigInteger[] divideAndRemainder = sum.divideAndRemainder(BigInteger.TEN);
+			
+			result = divideAndRemainder[1].toString()+result;
+			sum=divideAndRemainder[0];
+		}
+		
+		return result;
+	}
 }
