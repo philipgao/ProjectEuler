@@ -6,7 +6,6 @@ package com.ssparrow.projecteuler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
@@ -97,7 +96,7 @@ public class Problem51To75 {
 					int totient= (primeList[i]-1)*(primeList[j]-1);
 					double ratio=((double)number)/((double)totient);
 					
-					if(isPermute(number, totient)){
+					if(NumberUtil.isPermute(number, totient)){
 						if(ratio<minRatio){
 							result=number;
 							minRatio=ratio;
@@ -108,17 +107,5 @@ public class Problem51To75 {
 		}
 		
 		return result;
-	}
-	
-	public static boolean isPermute(int source, int target){
-		char[] sourceArray = String.valueOf(source).toCharArray();
-		Arrays.sort(sourceArray);
-		String sortedSource=new String(sourceArray);
-		
-		char[] targetArray = String.valueOf(target).toCharArray();
-		Arrays.sort(targetArray);
-		String sortedTarget=new String(targetArray);
-		
-		return sortedSource.equals(sortedTarget);
 	}
 }

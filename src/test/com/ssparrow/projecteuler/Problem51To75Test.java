@@ -26,7 +26,7 @@ public class Problem51To75Test {
 	
 	@Test
 	public void testP070FIndMinRatioPermutedTotient(){
-		assertTrue(Problem51To75.isPermute(87109, 79180));
+		assertTrue(NumberUtil.isPermute(87109, 79180));
 		
 		assertEquals(783169,  Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
 		

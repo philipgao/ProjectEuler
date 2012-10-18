@@ -3,6 +3,8 @@
  */
 package com.ssparrow.projecteuler;
 
+import java.util.Arrays;
+
 /**
  * @author Gao, Fei
  *
@@ -64,6 +66,18 @@ public class NumberUtil {
 		}
 		
 		return true;
+	}
+
+	public static boolean isPermute(int source, int target){
+		char[] sourceArray = String.valueOf(source).toCharArray();
+		Arrays.sort(sourceArray);
+		String sortedSource=new String(sourceArray);
+		
+		char[] targetArray = String.valueOf(target).toCharArray();
+		Arrays.sort(targetArray);
+		String sortedTarget=new String(targetArray);
+		
+		return sortedSource.equals(sortedTarget);
 	}
 
 }

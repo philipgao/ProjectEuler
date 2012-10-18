@@ -1354,4 +1354,35 @@ public class Problem26To50 {
 		
 		return result;
 	}
+	
+	/**
+	 * The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases by 3330, is unusual in two ways: (i) each of the three terms are prime, and, (ii) each of the 4-digit numbers are permutations of one another.
+	 * 
+	 * There are no arithmetic sequences made up of three 1-, 2-, or 3-digit primes, exhibiting this property, but there is one other 4-digit increasing sequence.
+	 * 
+	 * What 12-digit number do you form by concatenating the three terms in this sequence?
+	 * @return
+	 */
+	public static Triplet p049FindThreeIncreasingPermutePrimes(){
+		int[] primeList = PrimeUtil.getAllPrimeBelowN(10000);
+		BitSet primeBitSet=new BitSet();
+		for(int i=1;i<primeList.length;i++){
+			primeBitSet.set(primeList[i]);
+		}
+		
+		for(int i=1;i<primeList.length;i++){
+			if(primeList[i]>1000 && primeList[i]!=1487){
+				int next1=primeList[i]+3330;
+				int next2=next1+3330;
+				
+				if(primeBitSet.get(next1) && NumberUtil.isPermute(primeList[i], next1)
+						&& primeBitSet.get(next2) && NumberUtil.isPermute(primeList[i], next2)){
+					return new Triplet(primeList[i], next1, next2);
+				}
+			}
+		}
+		
+		return null;
+	}
+	
 }

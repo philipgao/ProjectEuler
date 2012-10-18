@@ -233,4 +233,9 @@ public class Problem26To50Test {
 		assertEquals("9110846700", Problem26To50.p048StringFindLast10DigitOfSeriesSum(1000));
 	}
 	
+	@Test
+	public void testP049FindThreeIncreasingPermutePrimes(){
+		assertEquals(new Triplet(2969, 6299, 9629), Problem26To50.p049FindThreeIncreasingPermutePrimes());
+	}
+	
 }
