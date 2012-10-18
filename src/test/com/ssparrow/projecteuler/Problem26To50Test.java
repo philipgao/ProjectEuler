@@ -238,4 +238,8 @@ public class Problem26To50Test {
 		assertEquals(new Triplet(2969, 6299, 9629), Problem26To50.p049FindThreeIncreasingPermutePrimes());
 	}
 	
+	@Test
+	public void testP050FindPrimeFomConsecutivePrimSum(){
+		assertEquals(997651, Problem26To50.p050FindPrimeFomConsecutivePrimSum());
+	}
 }

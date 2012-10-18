@@ -1385,4 +1385,61 @@ public class Problem26To50 {
 		return null;
 	}
 	
+	/**
+	 * The prime 41, can be written as the sum of six consecutive primes:
+	 * 
+	 * 41 = 2 + 3 + 5 + 7 + 11 + 13
+	 * This is the longest sum of consecutive primes that adds to a prime below one-hundred.
+	 * 
+	 * The longest sum of consecutive primes below one-thousand that adds to a prime, contains 21 terms, and is equal to 953.
+	 * 
+	 * Which prime, below one-million, can be written as the sum of the most consecutive primes?
+	 * @return
+	 */
+	public static int p050FindPrimeFomConsecutivePrimSum(){
+		int MAX=1000000;
+		
+		int[] primeList = PrimeUtil.getAllPrimeBelowN(MAX);
+		BitSet primeBitSet=new BitSet();
+		for(int i=1;i<primeList.length;i++){
+			primeBitSet.set(primeList[i]);
+		}
+		
+		int maxEnd=0;
+		int [] primeSum=new int[primeList.length];
+		primeSum[1]=primeList[1];
+		for(int i=2;i<primeList.length;i++){
+			primeSum[i]=primeSum[i-1]+primeList[i];
+			if(primeSum[i]>MAX){
+				maxEnd=i-1;
+				break;
+			}
+		}
+		
+		int maxLength=0;
+		int maxNum=0;
+		Map<Integer, Pair> result=new HashMap<Integer, Pair>();
+		
+		for(int end=maxEnd;end>=1;end--){
+			int sum=primeSum[end];
+			
+			int start=1;
+			while(!primeBitSet.get(sum) && start<end){
+				sum = sum-primeList[start++];
+			}
+			
+			int length=end-start+1;
+			if(length>maxLength){
+				maxLength=length;
+				maxNum=sum;
+				
+				result.put(maxNum, new Pair(start, end));
+			}
+		}
+		
+		
+		result.get(maxNum);
+		return maxNum;
+	}
+	
 }
