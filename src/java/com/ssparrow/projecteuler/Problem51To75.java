@@ -6,6 +6,11 @@ package com.ssparrow.projecteuler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
@@ -13,7 +18,108 @@ import java.util.StringTokenizer;
  *
  */
 public class Problem51To75 {
+	/**
+	 * By replacing the 1st digit of *3, it turns out that six of the nine possible values: 13, 23, 43, 53, 73, and 83, are all prime.
+	 * 
+	 * By replacing the 3rd and 4th digits of 56**3 with the same digit, this 5-digit number is the first example having seven primes among the ten generated numbers, 
+	 * yielding the family: 56003, 56113, 56333, 56443, 56663, 56773, and 56993. Consequently 56003, being the first member of this family, is the smallest prime with this property.
+	 * 
+	 * Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime value family.
+	 * @return
+	 */
+	public static int p051FindSmallest8PrimeValueFamily(int familyNum){
+		final int MAX=10000000;
+		
+		int[] primeList = PrimeUtil.getAllPrimeBelowN(MAX);
+		BitSet bitSet=new BitSet();
+		for(int i=1;i<primeList.length;i++){
+			bitSet.set(primeList[i]);
+		}
+		
+		for(int i=1;i<primeList.length;i++){
+			if(isPrimeValueFamily(primeList[i], bitSet, familyNum)){
+				return primeList[i];
+			}
+		}
+		
+		return 0;
+	}
+	
+	private static boolean isPrimeValueFamily(int prime, BitSet bitSet, int familyNum){
+		int [] digits=NumberUtil.getNumberDigits(prime, Endian.BIG);
+		Map<Integer, List<Integer>> digitIndexsMap=getDigitGroups(digits);
+		
+		for(int digit:digitIndexsMap.keySet()){
+			
+			List<Integer> indexList = digitIndexsMap.get(digit);
+			
+			int maxLength=indexList.size();
+			for(int length=1;length<=maxLength;length++){
+				for(int start=0;start<=maxLength-length;start++){
 
+					int primeCount=0;
+					for(int subsititue=0;subsititue<=9;subsititue++){
+						if(subsititue==0 && indexList.get(start)==0){
+							continue;
+						}
+						
+						int[] clone = digits.clone();
+						
+						for(int i=start;i<start+length;i++){
+							clone[indexList.get(i)]=subsititue;
+						}
+						
+						int value=NumberUtil.getNumber(clone, 0, clone.length);
+						
+						if(bitSet.get(value)){
+							primeCount++;
+						}
+					}
+					
+					if(primeCount>=familyNum){
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	private static Map<Integer, List<Integer>> getDigitGroups(int [] digits){
+		Map<Integer, List<Integer>> digitIndexsMap=new HashMap<Integer, List<Integer>>();
+		
+		for(int i=0;i<digits.length;i++){
+			List<Integer> indexList=digitIndexsMap.get(digits[i]);
+			if(indexList==null){
+				indexList=new ArrayList<Integer>();
+				digitIndexsMap.put(digits[i], indexList);
+			}
+			indexList.add(i);
+		}
+		
+		return digitIndexsMap;
+	}
+	
+	/**
+	 * By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
+	 * 
+	 * 3
+	 * 7 4
+	 * 2 4 6
+	 * 8 5 9 3
+	 * 
+	 * That is, 3 + 7 + 4 + 9 = 23.
+	 * 
+	 * Find the maximum total from top to bottom in triangle.txt (right click and 'Save Link/Target As...'), a 15K text file containing a triangle with one-hundred rows.
+	 * 
+	 * NOTE: This is a much more difficult version of Problem 18. It is not possible to try every route to solve this problem, as there are 299 altogether! 
+	 * If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all. There is an efficient algorithm to solve it. ;o)
+	 * @param filename
+	 * @param size
+	 * @return
+	 * @throws IOException
+	 */
 	public static int p067FindFindMaxPathInMatrix(String filename, int size) throws IOException{
 		BufferedReader reader=new BufferedReader(new FileReader(filename));
 		int [][] matrix = new int[size][];

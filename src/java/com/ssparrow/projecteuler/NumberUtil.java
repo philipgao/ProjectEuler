@@ -80,4 +80,39 @@ public class NumberUtil {
 		return sortedSource.equals(sortedTarget);
 	}
 
+	public static int getNumber(int [] digits, int start, int length){
+		int end=start+length-1;
+		
+		int index=start;
+		int number=0;
+		while(index<=end){
+			number=number*10+digits[index];
+			index++;
+		}
+		
+		return number;
+	}
+
+	public static int [] getNumberDigits(int number, Endian endian){
+		int [] temp=new int [10];
+		int index=0;
+		
+		while(number>0){
+			temp[index++]=number%10;
+			number=number/10;
+		}
+		
+		int [] result=new int[index];
+		
+		if(endian==Endian.LITTLE){
+			System.arraycopy(temp, 0, result, 0, index);
+		}else if(endian==Endian.BIG){
+			for(int i=0;i<index;i++){
+				result[index-1-i]=temp[i];
+			}
+		}
+		
+		return result;
+	}
+
 }

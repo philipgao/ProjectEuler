@@ -14,7 +14,16 @@ import org.junit.Test;
  *
  */
 public class Problem51To75Test {
+	
+	@Test
+	public void testP051FindSmallest8PrimeValueFamily(){
+		assertEquals(13, Problem51To75.p051FindSmallest8PrimeValueFamily(6));
 
+		assertEquals(56003, Problem51To75.p051FindSmallest8PrimeValueFamily(7));
+		
+		assertEquals(121313, Problem51To75.p051FindSmallest8PrimeValueFamily(8));
+	}
+	
 	@Test
 	public void testP067FindFindMaxPathInMatrix() throws IOException {
 		assertEquals(23, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-4.txt",4));

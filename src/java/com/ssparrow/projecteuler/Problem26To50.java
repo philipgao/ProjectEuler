@@ -791,7 +791,7 @@ public class Problem26To50 {
 	private static int findLargestPandigitNumberFormedByConcatProducts(boolean [] used, int [] digits, int position){
 		if(position==9){
 			if(isFormedByConcatProducts(digits)){
-				return getNumber(digits, 0, 9);
+				return NumberUtil.getNumber(digits, 0, 9);
 			}
 			return -1;
 		}
@@ -818,7 +818,7 @@ public class Problem26To50 {
 		for(int l=1;l<5;l++){
 			int start=0;
 
-			int firstNumber=getNumber(digits, start, l);
+			int firstNumber=NumberUtil.getNumber(digits, start, l);
 			
 			int times=2;
 			int nextNumber=firstNumber*times;
@@ -826,7 +826,7 @@ public class Problem26To50 {
 			
 			start=start+l;
 			while(digits.length-start>=nextNumberLength){
-				if(getNumber(digits, start, nextNumberLength)!=nextNumber){
+				if(NumberUtil.getNumber(digits, start, nextNumberLength)!=nextNumber){
 					break;
 				}
 				
@@ -844,19 +844,6 @@ public class Problem26To50 {
 		return false;
 	}
 
-	private static int getNumber(int [] digits, int start, int length){
-		int end=start+length-1;
-		
-		int index=start;
-		int number=0;
-		while(index<=end){
-			number=number*10+digits[index];
-			index++;
-		}
-		
-		return number;
-	}
-	
 	private static BigInteger getBigNumber(int [] digits, int start, int length){
 		BigInteger number=BigInteger.ZERO;
 		
@@ -994,7 +981,7 @@ public class Problem26To50 {
 	
 	private static int findLargestPandigitPrime(int [] number, boolean [] used, int position){
 		if(position==number.length){
-			int value=getNumber(number, 0, number.length);
+			int value=NumberUtil.getNumber(number, 0, number.length);
 			
 			if(number[number.length-1]%2!=0 && PrimeUtil.isPrime(value)){
 				return value;
@@ -1112,31 +1099,31 @@ public class Problem26To50 {
 	
 	private static void findAllPandigitWithGivenAttributes(List<BigInteger> result, boolean [] flags, int [] number, int position){
 		if(position==flags.length){
-			int d1 = getNumber(number, 1, 3);
+			int d1 = NumberUtil.getNumber(number, 1, 3);
 			if(d1%2!=0){
 				return;
 			}
-			int d2 = getNumber(number, 2, 3);
+			int d2 = NumberUtil.getNumber(number, 2, 3);
 			if(d2%3!=0){
 				return;
 			}
-			int d3 = getNumber(number, 3, 3);
+			int d3 = NumberUtil.getNumber(number, 3, 3);
 			if(d3%5!=0){
 				return;
 			}
-			int d4 = getNumber(number, 4, 3);
+			int d4 = NumberUtil.getNumber(number, 4, 3);
 			if(d4%7!=0){
 				return;
 			}
-			int d5 = getNumber(number, 5, 3);
+			int d5 = NumberUtil.getNumber(number, 5, 3);
 			if(d5%11!=0){
 				return;
 			}
-			int d6 = getNumber(number, 6, 3);
+			int d6 = NumberUtil.getNumber(number, 6, 3);
 			if(d6%13!=0){
 				return;
 			}
-			int d7 = getNumber(number, 7, 3);
+			int d7 = NumberUtil.getNumber(number, 7, 3);
 			if(d7%17!=0){
 				return;
 			}
