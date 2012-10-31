@@ -25,6 +25,11 @@ public class Problem51To75Test {
 	}
 	
 	@Test
+	public void testP052FindSmallestNumberWithSameDigitsAsItsTimes(){
+		assertEquals(142857, Problem51To75.p052FindSmallestNumberWithSameDigitsAsItsTimes());
+	}
+	
+	@Test
 	public void testP067FindFindMaxPathInMatrix() throws IOException {
 		assertEquals(23, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-4.txt",4));
 

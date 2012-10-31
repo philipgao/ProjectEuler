@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
@@ -99,6 +100,47 @@ public class Problem51To75 {
 		}
 		
 		return digitIndexsMap;
+	}
+	
+	/**
+	 * It can be seen that the number, 125874, and its double, 251748, contain exactly the same digits, but in a different order.
+	 * 
+	 * Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+	 * @return
+	 */
+	public static int p052FindSmallestNumberWithSameDigitsAsItsTimes(){
+		for(int number=1;number<=10000000;number++){
+			boolean match=true;
+			for(int times=2;times<=6;times++){
+				int product=times*number;
+				if(!hasSameDigits(number, product)){
+					match=false;
+				}
+			}
+			
+			if(match){
+				return number;
+			}
+		}
+		
+		return 0;
+	}
+	
+	private static boolean hasSameDigits(int number1, int number2){
+		String str1=String.valueOf(number1);
+		String str2=String.valueOf(number2);
+		
+		if(str1.length()==str2.length()){
+			char [] array1=str1.toCharArray();
+			char [] array2=str2.toCharArray();
+			
+			Arrays.sort(array1);
+			Arrays.sort(array2);
+			
+			return Arrays.equals(array1, array2);
+		}
+		
+		return false;
 	}
 	
 	/**
