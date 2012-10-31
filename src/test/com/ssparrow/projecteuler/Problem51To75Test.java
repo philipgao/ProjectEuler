@@ -30,6 +30,11 @@ public class Problem51To75Test {
 	}
 	
 	@Test
+	public void testP053FindCountOfCnrLargerThanTarget(){
+		assertEquals(4075, Problem51To75.p053FindCountOfCnrLargerThanTarget(100, 1000000));
+	}
+	
+	@Test
 	public void testP067FindFindMaxPathInMatrix() throws IOException {
 		assertEquals(23, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-4.txt",4));
 
