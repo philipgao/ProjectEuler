@@ -3,6 +3,7 @@
  */
 package com.ssparrow.projecteuler;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
@@ -17,6 +18,17 @@ public class NumberUtil {
 	 */
 	public static boolean isPalindrome(int n){
 		return isPalindrome(n, 10);
+	}
+	
+	/**
+	 * @param number
+	 * @return
+	 */
+	public static boolean isPalindrome(BigInteger number){
+		int [] digits=getBigIntegerNumberDigits(number, Endian.BIG);
+		int [] reverseDigits=getBigIntegerNumberDigits(number, Endian.LITTLE);
+		
+		return Arrays.equals(digits, reverseDigits);
 	}
 	
 	public static boolean isPalindrome(int n, int radix){
@@ -115,4 +127,44 @@ public class NumberUtil {
 		return result;
 	}
 
+	/**
+	 * @param number
+	 * 
+	 * @param endian
+	 * @return
+	 */
+	public static int [] getBigIntegerNumberDigits(BigInteger number, Endian endian){
+		int [] temp=new int[100];
+		
+		int index=0;
+		while(number.compareTo(BigInteger.ZERO)>0){
+			BigInteger[] divideAndRemainder = number.divideAndRemainder(BigInteger.TEN);
+			
+			temp[index++]=divideAndRemainder[1].intValue();
+			
+			number=divideAndRemainder[0];
+		}
+		
+		int [] result=new int[index];
+		
+		if(endian==Endian.LITTLE){
+			System.arraycopy(temp, 0, result, 0, index);
+		}else{
+			for(int i=0;i<index;i++){
+				result[index-1-i]=temp[i];
+			}
+		}
+		
+		return result;
+	}
+	
+	public static BigInteger getBigIntegerNumber(int []digits, int start, int length){
+		BigInteger number = BigInteger.ZERO;
+		
+		for(int i=start;i<start+length;i++){
+			number = number.multiply(BigInteger.TEN).add(BigInteger.valueOf(digits[i]));
+		}
+		
+		return number;
+	}
 }
