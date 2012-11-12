@@ -3,6 +3,9 @@
  */
 package com.ssparrow.projecteuler;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -13,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 /**
@@ -43,6 +47,27 @@ find the maximum saving which can be achieved by removing redundant edges whilst
 	 * @param matrix
 	 * @return
 	 */
+	
+	public static int p107GetMaximumSaving(String fileName, int size) throws IOException{
+		BufferedReader reader=new BufferedReader(new FileReader(fileName));
+		
+		int [][] matrix=new int[size][size];
+		String line;
+		int row=0;
+		while((line=reader.readLine())!=null){
+			int column=0;
+			StringTokenizer st=new StringTokenizer(line,",");
+			while(st.hasMoreTokens()&&column<size){
+				String item = st.nextToken();
+				matrix[row][column]=item.equals("-")?0:Integer.parseInt(item);
+				column++;
+			}
+			row++;
+		}
+		
+		return p107GetMaximumSaving(matrix);
+	}
+	
 	public static int p107GetMaximumSaving(int [][] matrix){
 		int total=0;
 		for(int i=0;i<matrix.length;i++){

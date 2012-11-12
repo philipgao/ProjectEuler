@@ -5,6 +5,8 @@ package com.ssparrow.projecteuler;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 /**
@@ -14,7 +16,7 @@ import org.junit.Test;
 public class Problem101To125Test {
 
 	@Test
-	public void testP107GetMaximumSaving() {
+	public void testP107GetMaximumSaving() throws IOException {
 		int [][] matrix=new int [][]{
 				{0,16,12,21,0,0,0},
 				{16,0,0,17,20,0,0},
@@ -26,6 +28,8 @@ public class Problem101To125Test {
 		};
 		
 		assertEquals(150, Problem101To125.p107GetMaximumSaving(matrix));
+		
+		assertEquals(150, Problem101To125.p107GetMaximumSaving("test/data/p107.txt",40));
 	}
 
 }
