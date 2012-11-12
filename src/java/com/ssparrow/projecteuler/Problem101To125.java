@@ -81,7 +81,13 @@ find the maximum saving which can be achieved by removing redundant edges whilst
 		
 		List<List<Edge>> allCircles = new ArrayList<List<Edge>>();
 		
-		getAllCirclesInGraph(allCircles, graph.getVertex("0"), new ArrayList<Vertex>(),new ArrayList<Edge>());
+		//TODO Optimization needed, currently duplicate circle will be considered
+		for(Vertex vertex:graph.vertexes){
+			ArrayList<Vertex> visitedVertexes = new ArrayList<Vertex>();
+			visitedVertexes.add(vertex);
+			ArrayList<Edge> path = new ArrayList<Edge>();
+			getAllCirclesInGraph(allCircles, vertex, visitedVertexes,path);
+		}
 		
 		int saving=0;
 		while(!allCircles.isEmpty()){
@@ -113,16 +119,19 @@ find the maximum saving which can be achieved by removing redundant edges whilst
 	}
 		
 	private static void getAllCirclesInGraph(List<List<Edge>> result,Vertex vertex, List<Vertex> visitedVertexes, List<Edge> path){
-		visitedVertexes.add(vertex);
-		
 		for(Vertex adjacent:vertex.getAdjacentVertexes()){
+			Edge edge = vertex.getEdge(adjacent);
+			
 			if(visitedVertexes.size()>2 && visitedVertexes.get(0).equals(adjacent)){
 				List<Edge> circle=new ArrayList<Edge>(path);
-				circle.add(vertex.getEdge(adjacent));
+				circle.add(edge);
 				result.add(circle);
 			}else if(!visitedVertexes.contains(adjacent)){
-				path.add(vertex.getEdge(adjacent));
+				path.add(edge);
+				visitedVertexes.add(vertex);
 				getAllCirclesInGraph(result, adjacent, visitedVertexes, path);
+				visitedVertexes.remove(vertex);
+				path.remove(edge);
 			}
 		}
 		

@@ -25,7 +25,7 @@ public class Problem101To125Test {
 				{0,0,0,23,11,27,0}
 		};
 		
-		assertEquals(1, Problem101To125.p107GetMaximumSaving(matrix));
+		assertEquals(150, Problem101To125.p107GetMaximumSaving(matrix));
 	}
 
 }
