@@ -82,11 +82,13 @@ find the maximum saving which can be achieved by removing redundant edges whilst
 		List<List<Edge>> allCircles = new ArrayList<List<Edge>>();
 		
 		//TODO Optimization needed, currently duplicate circle will be considered
+		Set<Vertex> finishedVertextes = new HashSet<Vertex>();
 		for(Vertex vertex:graph.vertexes){
 			ArrayList<Vertex> visitedVertexes = new ArrayList<Vertex>();
 			visitedVertexes.add(vertex);
 			ArrayList<Edge> path = new ArrayList<Edge>();
-			getAllCirclesInGraph(allCircles, vertex, visitedVertexes,path);
+			getAllCirclesInGraph(finishedVertextes, allCircles, vertex, visitedVertexes,path);
+			finishedVertextes.add(vertex);
 		}
 		
 		int saving=0;
@@ -118,20 +120,22 @@ find the maximum saving which can be achieved by removing redundant edges whilst
 		return saving;
 	}
 		
-	private static void getAllCirclesInGraph(List<List<Edge>> result,Vertex vertex, List<Vertex> visitedVertexes, List<Edge> path){
+	private static void getAllCirclesInGraph(Set<Vertex> finishedVertextes, List<List<Edge>> result,Vertex vertex, List<Vertex> visitedVertexes, List<Edge> path){
 		for(Vertex adjacent:vertex.getAdjacentVertexes()){
-			Edge edge = vertex.getEdge(adjacent);
-			
-			if(visitedVertexes.size()>2 && visitedVertexes.get(0).equals(adjacent)){
-				List<Edge> circle=new ArrayList<Edge>(path);
-				circle.add(edge);
-				result.add(circle);
-			}else if(!visitedVertexes.contains(adjacent)){
-				path.add(edge);
-				visitedVertexes.add(vertex);
-				getAllCirclesInGraph(result, adjacent, visitedVertexes, path);
-				visitedVertexes.remove(vertex);
-				path.remove(edge);
+			if(!finishedVertextes.contains(adjacent)){
+				Edge edge = vertex.getEdge(adjacent);
+				
+				if(visitedVertexes.size()>2 && visitedVertexes.get(0).equals(adjacent)){
+					List<Edge> circle=new ArrayList<Edge>(path);
+					circle.add(edge);
+					result.add(circle);
+				}else if(!visitedVertexes.contains(adjacent)){
+					path.add(edge);
+					visitedVertexes.add(vertex);
+					getAllCirclesInGraph(finishedVertextes, result, adjacent, visitedVertexes, path);
+					visitedVertexes.remove(vertex);
+					path.remove(edge);
+				}
 			}
 		}
 		
