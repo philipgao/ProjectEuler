@@ -58,4 +58,15 @@ public class Problem51To75Test {
 
 	}
 
+	
+	@Test
+	public void testP058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(){
+//		assertEquals(3, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.7));
+//
+//		assertEquals(309, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.2));
+//
+//		assertEquals(981, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.15));
+
+		assertEquals(26241, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.1));
+	}
 }

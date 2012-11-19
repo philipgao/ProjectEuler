@@ -241,6 +241,70 @@ public class Problem51To75 {
 	}
 	
 	/**
+	 *  Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
+
+		37 36 35 34 33 32 31
+		38 17 16 15 14 13 30
+		39 18  5  4  3 12 29
+		40 19  6  1  2 11 28
+		41 20  7  8  9 10 27
+		42 21 22 23 24 25 26
+		43 44 45 46 47 48 49
+		
+		It is interesting to note that the odd squares lie along the bottom right diagonal, 
+		but what is more interesting is that 8 out of the 13 numbers lying along both diagonals are prime; 
+		that is, a ratio of 8/13  62%.
+		
+		If one complete new layer is wrapped around the spiral above,
+		a square spiral with side length 9 will be formed. If this process is continued, 
+		what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
+	 * @param limit
+	 * @return
+	 */
+	public static int p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(double limit){
+		int MAX = 30001;
+		
+		int [] primeList=PrimeUtil.getAllPrimeBelowN(MAX*MAX);
+		BitSet primeBitset=new BitSet();
+		for(int i=1;i<primeList.length;i++){
+			primeBitset.set(primeList[i]);
+		}
+		
+		int level=0;
+		int row=MAX/2;
+		int column=MAX/2;
+		
+		int number=1;
+		int primeCount=0;
+		while(level<=MAX/2){
+			if(primeBitset.get(number++) && (row==column || row+column==MAX-1)){
+				primeCount++;
+			}
+			
+			if(row==MAX/2+level && column==MAX/2+level){
+				double rate= (double)primeCount/(double)(4*level+1);
+//				System.out.println(level+":"+rate);
+				if(rate>0 && rate<limit){
+					return 2*level+1;
+				}
+				
+				level++;
+				column++;
+			}else if(row>MAX/2-level && column==MAX/2+level){
+				row--;
+			}else if(row==MAX/2-level && column>MAX/2-level){
+				column--;
+			}else if(row<MAX/2+level && column==MAX/2-level){
+				row++;
+			}else if(row==MAX/2+level && column<MAX/2+level){
+				column++;
+			}
+		}
+		
+		return 0;
+	}
+	
+	/**
 	 * By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 	 * 
 	 * 3
