@@ -38,25 +38,6 @@ public class Problem51To75Test {
 	public void testP055GetNumberOfLychrelNumber(){
 		assertEquals(249, Problem51To75.p055GetNumberOfLychrelNumber(10000));
 	}
-	
-	@Test
-	public void testP067FindFindMaxPathInMatrix() throws IOException {
-		assertEquals(23, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-4.txt",4));
-
-		assertEquals(1074, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-15.txt",15));
-
-		assertEquals(7273, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-100.txt",100));
-	}
-	
-	@Test
-	public void testP070FIndMinRatioPermutedTotient(){
-		assertTrue(NumberUtil.isPermute(87109, 79180));
-		
-		assertEquals(783169,  Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
-		
-		assertEquals(8319823, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
-
-	}
 
 	
 	@Test
@@ -68,5 +49,45 @@ public class Problem51To75Test {
 //		assertEquals(981, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.15));
 
 		assertEquals(26241, Problem51To75.p058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(0.1));
+	}
+	
+	@Test
+	public void testP067FindFindMaxPathInMatrix() throws IOException {
+		assertEquals(23, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-4.txt",4));
+
+		assertEquals(1074, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-15.txt",15));
+
+		assertEquals(7273, Problem51To75.p067FindFindMaxPathInMatrix("test/data/p067-100.txt",100));
+	}
+	
+	@Test
+	public void testp069GetTotientMaximum(){
+		assertEquals(1, Problem51To75.getTotient(2));
+		assertEquals(2, Problem51To75.getTotient(3));
+		assertEquals(2, Problem51To75.getTotient(4));
+		assertEquals(4, Problem51To75.getTotient(5));
+		assertEquals(2, Problem51To75.getTotient(6));
+		assertEquals(6, Problem51To75.getTotient(7));
+		assertEquals(4, Problem51To75.getTotient(8));
+		assertEquals(6, Problem51To75.getTotient(9));
+		assertEquals(4, Problem51To75.getTotient(10));
+		
+		assertEquals(6, Problem51To75.p069GetTotientMaximum(10));
+
+		assertEquals(210, Problem51To75.p069GetTotientMaximum(1000));
+
+		assertEquals(2310, Problem51To75.p069GetTotientMaximum(10000));
+
+//		assertEquals(210, Problem51To75.p069GetTotientMaximum(100000));
+	}
+	
+	@Test
+	public void testP070FIndMinRatioPermutedTotient(){
+		assertTrue(NumberUtil.isPermute(87109, 79180));
+		
+		assertEquals(783169,  Problem51To75.p070FIndMinRatioPermutedTotient(1000000));
+		
+		assertEquals(8319823, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
+
 	}
 }

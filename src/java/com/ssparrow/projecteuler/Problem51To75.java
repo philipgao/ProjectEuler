@@ -376,6 +376,75 @@ public class Problem51To75 {
 		findFindMaxPathInMatrix(matrix, result, row+1, column+1, sum);
 	}
 	
+	
+	/**
+	 *  
+	 *  Euler's Totient function, φ(n) [sometimes called the phi function], 
+	 *  is used to determine the number of numbers less than n which are relatively prime to n. 
+	 *  For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, φ(9)=6.
+
+		n	Relatively Prime	φ(n)	n/φ(n)
+		2	1	1	2
+		3	1,2	2	1.5
+		4	1,3	2	2
+		5	1,2,3,4	4	1.25
+		6	1,5	2	3
+		7	1,2,3,4,5,6	6	1.1666...
+		8	1,3,5,7	4	2
+		9	1,2,4,5,7,8	6	1.5
+		10	1,3,7,9	4	2.5
+		It can be seen that n=6 produces a maximum n/φ(n) for n  10.
+		
+		Find the value of n  1,000,000 for which n/φ(n) is a maximum.
+
+	 * @param limit
+	 * @return
+	 */
+	public static int p069GetTotientMaximum(int limit){
+		int max=2;
+		double maxRatio=Double.MIN_VALUE;
+		
+		for(int n=2;n<=limit;n++){
+			int totient=getTotient(n);
+			
+			double ratio=(double)n/(double)totient;
+			if(ratio>maxRatio){
+				max=n;
+				maxRatio=ratio;
+			}
+		}
+		
+		return max;
+		
+	}
+	
+	public static int getTotient(int n){
+		int result=1;
+		
+		BitSet flags=new BitSet();
+		
+		int number=2;
+		while(number<n){
+			if(!flags.get(number)){
+				int count=0;
+				for(int i=1;i*number<=n;i++){
+					if(i*number==n){
+						count=0;
+					}else if(!flags.get(i*number) ){
+						if(i==1 || n%i!=0){
+							count++;
+						}
+						flags.set(i*number);
+					}
+				}
+				
+				result+=count;
+			}
+			number++;
+		}
+		
+		return result;
+	}
 	/**
 	 * Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of positive numbers less than or equal to n which are relatively prime to n. 
 	 * For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, φ(9)=6.
