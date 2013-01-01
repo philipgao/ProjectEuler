@@ -39,6 +39,14 @@ public class Problem51To75Test {
 		assertEquals(249, Problem51To75.p055GetNumberOfLychrelNumber(10000));
 	}
 
+	@Test
+	public void testP057GetCountOfSpecificSquareRootFraction(){
+		assertEquals(0, Problem51To75.p057GetCountOfSpecificSquareRootFraction(5));
+
+		assertEquals(1, Problem51To75.p057GetCountOfSpecificSquareRootFraction(10));
+
+		assertEquals(153, Problem51To75.p057GetCountOfSpecificSquareRootFraction(1000));
+	}
 	
 	@Test
 	public void testP058GetAnticlockSpiralMatrixWithDiagPrimeRateBelowLimit(){

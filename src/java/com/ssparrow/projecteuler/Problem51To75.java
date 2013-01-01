@@ -240,6 +240,64 @@ public class Problem51To75 {
 		return NumberUtil.getBigIntegerNumber(digits, 0, digits.length);
 	}
 	
+	
+	/**
+	 * 
+	 *  It is possible to show that the square root of two can be expressed as an infinite continued fraction.
+
+		 2 = 1 + 1/(2 + 1/(2 + 1/(2 + ... ))) = 1.414213...
+		
+		By expanding this for the first four iterations, we get:
+		
+		1 + 1/2 = 3/2 = 1.5
+		1 + 1/(2 + 1/2) = 7/5 = 1.4
+		1 + 1/(2 + 1/(2 + 1/2)) = 17/12 = 1.41666...
+		1 + 1/(2 + 1/(2 + 1/(2 + 1/2))) = 41/29 = 1.41379...
+		
+		The next three expansions are 99/70, 239/169, and 577/408, but the eighth expansion, 1393/985, is the first example where the number of digits in the numerator exceeds the number of digits in the denominator.
+		
+		In the first one-thousand expansions, how many fractions contain a numerator with more digits than denominator?
+
+	 * @param limit
+	 * @return
+	 */
+	public static int p057GetCountOfSpecificSquareRootFraction(int limit){
+		int count=0;
+		
+		Fraction previouFraction=new Fraction(BigInteger.ZERO, BigInteger.ONE);
+		Fraction squareRoot = new Fraction(BigInteger.ZERO, BigInteger.ONE);
+		for(int i=0;i<limit;i++){
+			BigInteger newNumerator=previouFraction.getDenominator();
+			BigInteger newDenominator=BigInteger.valueOf(2).multiply(previouFraction.getDenominator()).add(previouFraction.getNumerator());
+			
+			previouFraction.setNumerator(newNumerator);
+			previouFraction.setDenominator(newDenominator);
+			
+			BigInteger sqtNumberator=newNumerator.add(newDenominator);
+			BigInteger sqtDenominator=newDenominator;
+			
+			squareRoot.setNumerator(sqtNumberator);
+			squareRoot.setDenominator(sqtDenominator);
+			
+			if(getDigits(sqtNumberator)>getDigits(sqtDenominator)){
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	private static int getDigits(BigInteger number){
+		int digits=0;
+		
+		while(number.compareTo(BigInteger.ZERO)>0){
+			number=number.divide(BigInteger.TEN);
+			digits++;
+		}
+		
+		return digits;
+	}
+	
 	/**
 	 *  Starting with 1 and spiralling anticlockwise in the following way, a square spiral with side length 7 is formed.
 
