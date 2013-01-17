@@ -14,6 +14,19 @@ import org.junit.Test;
  *
  */
 public class Problem76To100Test {
+	
+	@Test
+	public void testP076GetPossibleCombinationCount(){
+		assertEquals(6, Problem76To100.p076GetPossibleCombinationCount(5));
+		
+//		assertEquals(41, Problem76To100.p076GetPossibleCombinationCount(50));
+
+//		assertEquals(626, Problem76To100.p076GetPossibleCombinationCount(20));
+
+//		assertEquals(1957, Problem76To100.p076GetPossibleCombinationCount(25));
+		
+//		assertEquals(6, Problem76To100.p076GetPossibleCombinationCount(100));
+	}
 
 	@Test
 	public void testP083FindMinimalPath() throws IOException {

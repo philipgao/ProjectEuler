@@ -6,6 +6,13 @@ package com.ssparrow.projecteuler;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 import java.util.StringTokenizer;
 
 /**
@@ -13,6 +20,50 @@ import java.util.StringTokenizer;
  *
  */
 public class Problem76To100 {
+	
+	/**
+	 * 
+	 *  It is possible to write five as a sum in exactly six different ways:
+
+		4 + 1
+		3 + 2
+		3 + 1 + 1
+		2 + 2 + 1
+		2 + 1 + 1 + 1
+		1 + 1 + 1 + 1 + 1
+		
+		How many different ways can one hundred be written as a sum of at least two positive integers?
+
+
+	 * @param sum
+	 * @return
+	 */
+	public static int p076GetPossibleCombinationCount(int sum){
+		int [] combination = new int[sum];
+		
+		int count=0;
+		for(int num=2;num<=sum;num++){
+			count+=getPossibleCombinationCount(sum, num, combination,0);
+		}
+		
+		return count;
+	}
+	
+	private static int getPossibleCombinationCount( int remains, int num, int [] combination, int position){
+		if(position==num){
+			if(remains==0){
+				return 1;
+			}
+			return 0;
+		}
+		
+		int count=0;
+		for(int number =1; number<=remains/(num-position);number++){
+			combination[position]=number;
+			count+=getPossibleCombinationCount(remains-number, num, combination, position+1);
+		}
+		return count;
+	}
 	/**
 	 * 
 	 *  NOTE: This problem is a significantly more challenging version of Problem 81.
