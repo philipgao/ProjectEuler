@@ -544,4 +544,53 @@ public class Problem51To75 {
 		
 		return result;
 	}
+	
+	/**
+	 *  Consider the fraction, n/d, where n and d are positive integers. If nd and HCF(n,d)=1, it is called a reduced proper fraction.
+
+		If we list the set of reduced proper fractions for d  8 in ascending order of size, we get:
+		
+		1/8, 1/7, 1/6, 1/5, 1/4, 2/7, 1/3, 3/8, 2/5, 3/7, 1/2, 4/7, 3/5, 5/8, 2/3, 5/7, 3/4, 4/5, 5/6, 6/7, 7/8
+		
+		It can be seen that there are 21 elements in this set.
+		
+		How many elements would be contained in the set of reduced proper fractions for d  1,000,000?
+	 * @param maxDenominator
+	 * @return
+	 */
+	public static BigInteger p072GetReducedProperFractionCount(int maxDenominator){
+		int [] allPrimes=PrimeUtil.getAllPrimeBelowN(maxDenominator);
+		
+		BitSet primeBitSet=new BitSet();
+		for(int i=1;i<allPrimes.length;i++){
+			primeBitSet.set(allPrimes[i]);
+		}
+		
+		BigInteger count=BigInteger.valueOf(maxDenominator-1);
+		for(int nominator=2;nominator<maxDenominator;nominator++){
+			if(primeBitSet.get(nominator)){
+				count=count.add(BigInteger.valueOf(maxDenominator-nominator-(maxDenominator/nominator-1)));
+			}else{
+				BitSet flags=new BitSet();
+				
+				int temp=nominator;
+				for(int primeIndex=1;primeIndex<allPrimes.length && allPrimes[primeIndex]<=temp;primeIndex++){
+					if(temp%allPrimes[primeIndex]==0){
+						for(int i=nominator/allPrimes[primeIndex];i<=maxDenominator/allPrimes[primeIndex];i++){
+							flags.set(i*allPrimes[primeIndex]);
+						}
+						temp=temp/allPrimes[primeIndex];
+					}
+				}
+				
+				for(int denominator=nominator+1;denominator<=maxDenominator;denominator++){
+					if(!flags.get(denominator)){
+						count=count.add(BigInteger.ONE);
+					}
+				}
+			}
+		}
+		
+		return count;
+	}
 }

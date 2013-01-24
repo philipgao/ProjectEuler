@@ -6,6 +6,7 @@ package com.ssparrow.projecteuler;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.math.BigInteger;
 
 import org.junit.Test;
 
@@ -97,5 +98,16 @@ public class Problem51To75Test {
 		
 		assertEquals(8319823, Problem51To75.p070FIndMinRatioPermutedTotient(10000000));
 
+	}
+	
+	@Test
+	public void testP072GetReducedProperFractionCount(){
+		assertEquals(BigInteger.valueOf(21), Problem51To75.p072GetReducedProperFractionCount(8));
+
+		assertEquals(BigInteger.valueOf(304191), Problem51To75.p072GetReducedProperFractionCount(1000));
+
+		assertEquals(BigInteger.valueOf(30397485), Problem51To75.p072GetReducedProperFractionCount(10000));
+
+//		assertEquals(new BigInteger("3039650753",10), Problem51To75.p072GetReducedProperFractionCount(100000));
 	}
 }
