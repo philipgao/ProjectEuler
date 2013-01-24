@@ -566,6 +566,19 @@ public class Problem51To75 {
 			primeBitSet.set(allPrimes[i]);
 		}
 		
+		Map<Integer, BitSet> primeMultiplyBitSetMap=new HashMap<Integer, BitSet>();
+		for(int i=1;i<allPrimes.length;i++){
+			System.out.println(allPrimes[i]);
+			
+			BitSet bitSet=new BitSet();
+			
+			for(int multiply=1;multiply*allPrimes[i]<=maxDenominator;multiply++){
+				bitSet.set(multiply*allPrimes[i]);
+			}
+			
+			primeMultiplyBitSetMap.put(allPrimes[i], bitSet);
+		}
+		
 		BigInteger count=BigInteger.valueOf(maxDenominator-1);
 		for(int nominator=2;nominator<maxDenominator;nominator++){
 			if(primeBitSet.get(nominator)){
@@ -576,18 +589,15 @@ public class Problem51To75 {
 				int temp=nominator;
 				for(int primeIndex=1;primeIndex<allPrimes.length && allPrimes[primeIndex]<=temp;primeIndex++){
 					if(temp%allPrimes[primeIndex]==0){
-						for(int i=nominator/allPrimes[primeIndex];i<=maxDenominator/allPrimes[primeIndex];i++){
-							flags.set(i*allPrimes[primeIndex]);
-						}
+						BitSet bitSet = primeMultiplyBitSetMap.get(allPrimes[primeIndex]);
+						bitSet.clear(1, nominator+1);
+						
+						flags.or(bitSet);
 						temp=temp/allPrimes[primeIndex];
 					}
 				}
 				
-				for(int denominator=nominator+1;denominator<=maxDenominator;denominator++){
-					if(!flags.get(denominator)){
-						count=count.add(BigInteger.ONE);
-					}
-				}
+				count=count.add(BigInteger.valueOf(maxDenominator-nominator-flags.cardinality()));
 			}
 		}
 		
