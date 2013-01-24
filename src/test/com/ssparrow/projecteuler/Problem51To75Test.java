@@ -108,6 +108,6 @@ public class Problem51To75Test {
 
 		assertEquals(BigInteger.valueOf(30397485), Problem51To75.p072GetReducedProperFractionCount(10000));
 
-//		assertEquals(new BigInteger("3039650753",10), Problem51To75.p072GetReducedProperFractionCount(100000));
+		assertEquals(new BigInteger("3039650753",10), Problem51To75.p072GetReducedProperFractionCount(100000));
 	}
 }
