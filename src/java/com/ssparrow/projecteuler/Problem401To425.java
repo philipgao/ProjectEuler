@@ -47,7 +47,7 @@ public class Problem401To425 {
 		};
 		
 		SortedMap<Integer, SortedSet<Point>> pointMap=new TreeMap<Integer, SortedSet<Point>>();
-		for(int i=0;i<2*n;i++){
+		for(int i=0;i<=2*n;i++){
 			int x = BigInteger.valueOf(2).pow(i).divideAndRemainder(BigInteger.valueOf(n))[1].intValue();
 			int y = BigInteger.valueOf(3).pow(i).divideAndRemainder(BigInteger.valueOf(n))[1].intValue();
 			
@@ -66,9 +66,17 @@ public class Problem401To425 {
 		}
 		
 		Map<Integer, List<Point>> results=new HashMap<Integer, List<Point>>();
-		List<Point> maxPath = GetMaxUphillPathLength(results, pointList, pointList.size()-1);
+		GetMaxUphillPathLength(results, pointList, pointList.size()-1);
 		
-		return maxPath.size();
+		int maxPathLength=Integer.MIN_VALUE;
+		for(Integer key: results.keySet()){
+			int pathLength = results.get(key).size();
+			if(pathLength>maxPathLength){
+				maxPathLength=pathLength;
+			}
+		}
+		
+		return maxPathLength;
 	}
 	
 	private static List<Point> GetMaxUphillPathLength(Map<Integer, List<Point>> results, List<Point> pointList, int index){
@@ -83,7 +91,6 @@ public class Problem401To425 {
 		for(int i=index-1;i>=0;i--){
 			List<Point> subResult = GetMaxUphillPathLength(results, pointList, i);
 			
-			boolean isContinuous=false;
 			try{
 				int compare=current.compareTo(subResult.get(subResult.size()-1));
 				
@@ -91,15 +98,8 @@ public class Problem401To425 {
 					maxPath=new ArrayList<Point>();
 					maxPath.addAll(subResult);
 					maxPath.add(current);
-					isContinuous=true;
-//					System.out.println(maxPath);
 				}
 			}catch(UnComparableException ex){
-			}
-			
-			if(!isContinuous && subResult.size()>maxPath.size()){
-				maxPath=subResult;
-//				System.out.println(maxPath);
 			}
 		}
 		

@@ -19,9 +19,9 @@ public class Problem401To425Test {
 
 		assertEquals(11, Problem401To425.p411GetMaxUphillPathLength(50));
 
-//		assertEquals(14, Problem401To425.p411GetMaxUphillPathLength(123));
+		assertEquals(14, Problem401To425.p411GetMaxUphillPathLength(123));
 
-//		assertEquals(48, Problem401To425.p411GetMaxUphillPathLength(10000));
+		assertEquals(48, Problem401To425.p411GetMaxUphillPathLength(10000));
 	}
 
 }
